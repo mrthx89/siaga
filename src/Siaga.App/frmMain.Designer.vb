@@ -28,15 +28,19 @@ Partial Class frmMain
         Me.tabbedView = New DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(Me.components)
         Me.ribbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.skinRibbonGalleryBarItem = New DevExpress.XtraBars.SkinRibbonGalleryBarItem()
-        Me.barSubItemNavigation = New DevExpress.XtraBars.BarSubItem()
         Me.employeesBarButtonItem = New DevExpress.XtraBars.BarButtonItem()
         Me.customersBarButtonItem = New DevExpress.XtraBars.BarButtonItem()
-        Me.ribbonPage = New DevExpress.XtraBars.Ribbon.RibbonPage()
-        Me.ribbonPageGroupNavigation = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.mnLogInOut = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnSetting = New DevExpress.XtraBars.BarButtonItem()
+        Me.RibbonPage2 = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.ribbonPageGroup = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.ribbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
+        Me.XtraTabbedMdiManager1 = New DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(Me.components)
         CType(Me.tabbedView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ribbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabbedView
@@ -47,12 +51,12 @@ Partial Class frmMain
         '
         Me.ribbonControl.ApplicationCaption = "Siaga.App"
         Me.ribbonControl.ExpandCollapseItem.Id = 0
-        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.barSubItemNavigation, Me.employeesBarButtonItem, Me.customersBarButtonItem})
+        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting})
         Me.ribbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonControl.MaxItemId = 46
+        Me.ribbonControl.MaxItemId = 48
         Me.ribbonControl.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always
         Me.ribbonControl.Name = "ribbonControl"
-        Me.ribbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.ribbonPage})
+        Me.ribbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage2, Me.RibbonPage1})
         Me.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013
         Me.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.[False]
         Me.ribbonControl.Size = New System.Drawing.Size(1173, 143)
@@ -63,14 +67,6 @@ Partial Class frmMain
         '
         Me.skinRibbonGalleryBarItem.Id = 14
         Me.skinRibbonGalleryBarItem.Name = "skinRibbonGalleryBarItem"
-        '
-        'barSubItemNavigation
-        '
-        Me.barSubItemNavigation.Caption = "Navigation"
-        Me.barSubItemNavigation.Id = 15
-        Me.barSubItemNavigation.ImageOptions.ImageUri.Uri = "NavigationBar"
-        Me.barSubItemNavigation.LinksPersistInfo.AddRange(New DevExpress.XtraBars.LinkPersistInfo() {New DevExpress.XtraBars.LinkPersistInfo(Me.employeesBarButtonItem), New DevExpress.XtraBars.LinkPersistInfo(Me.customersBarButtonItem)})
-        Me.barSubItemNavigation.Name = "barSubItemNavigation"
         '
         'employeesBarButtonItem
         '
@@ -84,17 +80,40 @@ Partial Class frmMain
         Me.customersBarButtonItem.Id = 45
         Me.customersBarButtonItem.Name = "customersBarButtonItem"
         '
-        'ribbonPage
+        'mnLogInOut
         '
-        Me.ribbonPage.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.ribbonPageGroupNavigation, Me.ribbonPageGroup})
-        Me.ribbonPage.Name = "ribbonPage"
-        Me.ribbonPage.Text = "View"
+        Me.mnLogInOut.Caption = "Login"
+        Me.mnLogInOut.Id = 46
+        Me.mnLogInOut.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.LogIn
+        Me.mnLogInOut.ItemShortcut = New DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L))
+        Me.mnLogInOut.Name = "mnLogInOut"
         '
-        'ribbonPageGroupNavigation
+        'mnSetting
         '
-        Me.ribbonPageGroupNavigation.ItemLinks.Add(Me.barSubItemNavigation)
-        Me.ribbonPageGroupNavigation.Name = "ribbonPageGroupNavigation"
-        Me.ribbonPageGroupNavigation.Text = "Module"
+        Me.mnSetting.Caption = "Setting"
+        Me.mnSetting.Id = 47
+        Me.mnSetting.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Setting
+        Me.mnSetting.Name = "mnSetting"
+        Me.mnSetting.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
+        '
+        'RibbonPage2
+        '
+        Me.RibbonPage2.Name = "RibbonPage2"
+        Me.RibbonPage2.Text = "Menu Utama"
+        Me.RibbonPage2.Visible = False
+        '
+        'RibbonPage1
+        '
+        Me.RibbonPage1.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup1, Me.ribbonPageGroup})
+        Me.RibbonPage1.Name = "RibbonPage1"
+        Me.RibbonPage1.Text = "View"
+        '
+        'RibbonPageGroup1
+        '
+        Me.RibbonPageGroup1.ItemLinks.Add(Me.mnLogInOut)
+        Me.RibbonPageGroup1.ItemLinks.Add(Me.mnSetting)
+        Me.RibbonPageGroup1.Name = "RibbonPageGroup1"
+        Me.RibbonPageGroup1.Text = "Modul"
         '
         'ribbonPageGroup
         '
@@ -111,6 +130,10 @@ Partial Class frmMain
         Me.ribbonStatusBar.Ribbon = Me.ribbonControl
         Me.ribbonStatusBar.Size = New System.Drawing.Size(1173, 31)
         '
+        'XtraTabbedMdiManager1
+        '
+        Me.XtraTabbedMdiManager1.MdiParent = Me
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -118,12 +141,15 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(1173, 752)
         Me.Controls.Add(Me.ribbonStatusBar)
         Me.Controls.Add(Me.ribbonControl)
+        Me.IsMdiContainer = True
         Me.Name = "frmMain"
         Me.Ribbon = Me.ribbonControl
         Me.StatusBar = Me.ribbonStatusBar
         Me.Text = "Siaga.App"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.tabbedView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ribbonControl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -132,12 +158,15 @@ Partial Class frmMain
 #End Region
     Private WithEvents tabbedView As DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView
     Private WithEvents ribbonControl As DevExpress.XtraBars.Ribbon.RibbonControl
-    Private WithEvents ribbonPage As DevExpress.XtraBars.Ribbon.RibbonPage
     Private WithEvents ribbonPageGroup As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Private WithEvents ribbonStatusBar As DevExpress.XtraBars.Ribbon.RibbonStatusBar
-    Private WithEvents ribbonPageGroupNavigation As DevExpress.XtraBars.Ribbon.RibbonPageGroup
-    Private WithEvents barSubItemNavigation As DevExpress.XtraBars.BarSubItem
     Private WithEvents skinRibbonGalleryBarItem As DevExpress.XtraBars.SkinRibbonGalleryBarItem
     Private WithEvents employeesBarButtonItem As DevExpress.XtraBars.BarButtonItem
     Private WithEvents customersBarButtonItem As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents XtraTabbedMdiManager1 As DevExpress.XtraTabbedMdi.XtraTabbedMdiManager
+    Friend WithEvents mnLogInOut As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPage1 As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents mnSetting As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPage2 As DevExpress.XtraBars.Ribbon.RibbonPage
 End Class

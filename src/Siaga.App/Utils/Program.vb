@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿Imports System.Data.Entity.Migrations
+Imports System.Globalization
 Imports System.Threading
 Imports DevExpress.LookAndFeel
 Imports DevExpress.Skins
@@ -40,6 +41,13 @@ Public Class Program
 
             OpenConfig()
 
+            Dim migrator = New DbMigrator(New Migrations.Configuration())
+            migrator.Update()
+
+            Dim db = New Data.ApplicationDbContext()
+            Migrations.Configuration.SeedData(db)
+            db.SaveChanges()
+
             Application.Run(New frmMain())
         Catch ex As Exception
             Log.Error(ex, "Error : " & ex.Message)
@@ -56,9 +64,9 @@ Public Class Program
         If Not IO.Directory.Exists(IO.Path.Combine(FolderApp, "Report")) Then IO.Directory.CreateDirectory(IO.Path.Combine(FolderApp, "Report"))
     End Sub
 
-    Private Shared Sub OpenConfig()
-        If (System.IO.File.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, "System", "AppConfig.json"))) Then
-            AppConfig = JsonConvert.DeserializeObject(Of Model.AppConfig)(System.IO.File.ReadAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "System", "AppConfig.json")))
+    Public Shared Sub OpenConfig()
+        If (IO.File.Exists(IO.Path.Combine(FolderApp, "System", "AppConfig.json"))) Then
+            AppConfig = JsonConvert.DeserializeObject(Of Model.AppConfig)(IO.File.ReadAllText(IO.Path.Combine(FolderApp, "System", "AppConfig.json")))
         End If
 
         If (AppConfig Is Nothing OrElse
@@ -71,6 +79,21 @@ Public Class Program
 
         SetSkinName(AppConfig.Theme)
     End Sub
+
+    Public Shared Sub SaveConfig(AppConfig As Model.AppConfig)
+        Using sw As New IO.StreamWriter(IO.Path.Combine(FolderApp, "System", "AppConfig.json"), False)
+            Try
+                sw.AutoFlush = True
+                sw.Write(JsonConvert.SerializeObject(AppConfig))
+                sw.Flush()
+            Catch ex As Exception
+                Log.Error(ex, "Error : " & ex.Message)
+            Finally
+                sw.Dispose()
+            End Try
+        End Using
+    End Sub
+
 
     Public Shared Sub SetSkinName(SkinName As String)
         SkinManager.EnableFormSkins()
