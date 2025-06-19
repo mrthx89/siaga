@@ -20,7 +20,7 @@ Namespace Repository
                 Catch ex As Exception
                     Log.Error(ex, "Error : " & ex.Message)
                     XtraMessageBox.Show("Info Kesalahan : " & ex.Message, Application.ProductName)
-                    hasil = New Tuple(Of Boolean, String, Entity.KategoriAsset)(False, "Info Kesalahan : " & ex.Message, Nothing)
+                    hasil = New Tuple(Of Boolean, String, List(Of Entity.KategoriAsset))(False, "Info Kesalahan : " & ex.Message, Nothing)
                 End Try
             End Using
             Return hasil
@@ -45,7 +45,7 @@ Namespace Repository
             Return hasil
         End Function
 
-        Public Function FindByKode(Kode As String) As Tuple(Of Boolean, String, List(Of Entity.KategoriAsset)) Implements IKategoriAsset.FindByKode
+        Public Function FindByKode(Kode As String) As Tuple(Of Boolean, String, Entity.KategoriAsset) Implements IKategoriAsset.FindByKode
             Dim hasil As New Tuple(Of Boolean, String, Entity.KategoriAsset)(False, String.Empty, Nothing)
             Using dlg As New WaitDialogForm("Sedang merefresh data ...", "Mohon tunggu sebentar")
                 Try

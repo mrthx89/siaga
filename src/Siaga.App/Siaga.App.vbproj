@@ -161,6 +161,7 @@
     <Compile Include="Data\Entity\DetailAsset.vb" />
     <Compile Include="Data\Entity\Asset.vb" />
     <Compile Include="Data\Entity\KategoriAsset.vb" />
+    <Compile Include="Data\Entity\Ruangan.vb" />
     <Compile Include="Data\Entity\Pengguna.vb" />
     <Compile Include="frmDaftarKategoriAsset.Designer.vb">
       <DependentUpon>frmDaftarKategoriAsset.vb</DependentUpon>

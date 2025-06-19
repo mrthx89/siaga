@@ -20,6 +20,8 @@ Namespace Data
 
         Public Property Penggunas As DbSet(Of Pengguna)
 
+        Public Property Ruangans As DbSet(Of Ruangan)
+
         Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
             MyBase.OnModelCreating(modelBuilder)
             ' Konfigurasi tambahan jika perlu
@@ -43,6 +45,13 @@ Namespace Data
                 .HasColumnAnnotation(
                     "Index",
                     New IndexAnnotation(New IndexAttribute("ix_asset_kd_asset") With {.IsUnique = True})
+                )
+
+            modelBuilder.Entity(Of Ruangan)() _
+                .Property(Function(p) p.kd_ruangan) _
+                .HasColumnAnnotation(
+                    "Index",
+                    New IndexAnnotation(New IndexAttribute("ix_ruangan_kd_ruangan") With {.IsUnique = True})
                 )
         End Sub
     End Class
