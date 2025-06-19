@@ -14,6 +14,10 @@ Namespace Data
             MyBase.New("name=DefaultConnection")
         End Sub
 
+        Public Property Assets As DbSet(Of Asset)
+
+        Public Property KategoriAssets As DbSet(Of KategoriAsset)
+
         Public Property Penggunas As DbSet(Of Pengguna)
 
         Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
@@ -32,6 +36,13 @@ Namespace Data
                 .HasColumnAnnotation(
                     "Index",
                     New IndexAnnotation(New IndexAttribute("ix_kategoriasset_kd_kategori") With {.IsUnique = True})
+                )
+
+            modelBuilder.Entity(Of Asset)() _
+                .Property(Function(p) p.kd_asset) _
+                .HasColumnAnnotation(
+                    "Index",
+                    New IndexAnnotation(New IndexAttribute("ix_asset_kd_asset") With {.IsUnique = True})
                 )
         End Sub
     End Class

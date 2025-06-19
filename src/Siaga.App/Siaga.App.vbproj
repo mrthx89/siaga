@@ -155,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\ApplicationDbContext.vb" />
+    <Compile Include="Data\Entity\DetailAsset.vb" />
+    <Compile Include="Data\Entity\Asset.vb" />
     <Compile Include="Data\Entity\KategoriAsset.vb" />
     <Compile Include="Data\Entity\Pengguna.vb" />
     <Compile Include="frmDashboard.Designer.vb">

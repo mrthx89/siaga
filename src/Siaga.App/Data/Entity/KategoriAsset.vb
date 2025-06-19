@@ -15,5 +15,8 @@ Namespace Data.Entity
 
         <MaxLength(255)>
         Public Property keterangan As String
+
+        ' Optional: Navigasi balik (One-to-Many)
+        Public Overridable Property Assets As ICollection(Of Asset)
     End Class
 End Namespace
