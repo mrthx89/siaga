@@ -175,6 +175,14 @@
       <DependentUpon>202506191506206_InitialCreate.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202506191506206_InitialCreate.vb" />
+    <Compile Include="Migrations\202506191532131_Assets.designer.vb">
+      <DependentUpon>202506191532131_Assets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506191532131_Assets.vb" />
+    <Compile Include="Migrations\202506191533514_Assets2.designer.vb">
+      <DependentUpon>202506191533514_Assets2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506191533514_Assets2.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\AppConfig.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -192,6 +200,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506191506206_InitialCreate.resx">
       <DependentUpon>202506191506206_InitialCreate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506191532131_Assets.resx">
+      <DependentUpon>202506191532131_Assets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506191533514_Assets2.resx">
+      <DependentUpon>202506191533514_Assets2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -7,8 +7,7 @@ Namespace Data.Entity
         <Key>
         Public Property id As Guid
 
-        <MaxLength(50)>
-        Public Property kd_asset As String
+        Public Property id_asset As Guid
 
         <MaxLength(50)>
         Public Property kd_detail As String
@@ -28,7 +27,7 @@ Namespace Data.Entity
         Public Property kondisi As String
 
         ' ✅ Relasi ke KategoriAsset (Foreign Key)
-        <ForeignKey("kd_asset")>
+        <ForeignKey("id_asset")>
         Public Overridable Property Asset As Asset
     End Class
 End Namespace

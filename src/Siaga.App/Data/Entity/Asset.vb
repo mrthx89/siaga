@@ -13,14 +13,13 @@ Namespace Data.Entity
         <MaxLength(100)>
         Public Property nama_asset As String
 
-        <MaxLength(50)>
-        Public Property kd_kategori As String
+        Public Property id_kategori As Guid
 
         <MaxLength(255)>
         Public Property keterangan As String
 
         ' ✅ Relasi ke KategoriAsset (Foreign Key)
-        <ForeignKey("kd_kategori")>
+        <ForeignKey("id_kategori")>
         Public Overridable Property KategoriAsset As KategoriAsset
 
         Public Overridable Property DetailAssets As ICollection(Of DetailAsset)
