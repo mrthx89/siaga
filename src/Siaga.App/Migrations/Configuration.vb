@@ -31,7 +31,7 @@ Namespace Migrations
                     .id = Guid.NewGuid(),
                     .user = "admin",
                     .nama = "Administrator",
-                    .password = Utils.Utils.HashPassword("123456") ' idealnya ini di-hash
+                    .password = Utils.Utils.HashPassword("123456".ToUpper()) ' idealnya ini di-hash
                 }
             )
             End If

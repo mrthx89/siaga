@@ -1,8 +1,11 @@
 ﻿Imports DevExpress.XtraBars
 Imports DevExpress.XtraBars.Ribbon
+Imports DevExpress.XtraEditors
+Imports Serilog
 
 Public Class frmMain
     Public Property IsLogin As Boolean = False
+    Public Property DbContext As New Data.ApplicationDbContext()
 
     Public Sub New()
         InitializeComponent()
@@ -19,10 +22,36 @@ Public Class frmMain
             Next
             mnLogInOut.ImageOptions.LargeImage = My.Resources.LogIn
             mnLogInOut.Caption = "Login"
+            mnStatusUser.Caption = "Username : (none)"
+            IsLogin = False
+            RibbonPage2.Visible = False
+            ribbonControl.SelectedPage = RibbonPage1
+
             'Buka Menu Login
+            ShowLoginForm()
         Else
             'Belum Login jadi buka Login
+            ShowLoginForm()
         End If
+    End Sub
+
+    Private Sub ShowLoginForm()
+        Using frm As New frmLogin() With {.MdiParent = Nothing}
+            Try
+                If (frm.ShowDialog(Me) = DialogResult.OK) Then
+                    IsLogin = True
+                    mnLogInOut.ImageOptions.LargeImage = My.Resources.LogOut
+                    mnLogInOut.Caption = "Logout"
+
+                    mnStatusUser.Caption = "Username : " & Program.UserLogin.nama
+                    RibbonPage2.Visible = True
+                    ribbonControl.SelectedPage = RibbonPage2
+                End If
+            Catch ex As Exception
+                Log.Logger.Error(ex, "Info Kesalahan : " & ex.Message)
+                XtraMessageBox.Show("Info Kesalahan : " & ex.Message)
+            End Try
+        End Using
     End Sub
 
     Private Sub mnLogInOut_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLogInOut.ItemClick
@@ -39,6 +68,7 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         OpenDashboard()
 
+        mnServer.Caption = "Server : " & DbContext.Database.Connection.DataSource
         IsLogin = False
         mnLogInOut.ImageOptions.LargeImage = My.Resources.LogIn
         mnLogInOut.Caption = "Login"
@@ -52,5 +82,28 @@ Public Class frmMain
     Private Sub skinRibbonGalleryBarItem_GalleryItemClick(sender As Object, e As GalleryItemClickEventArgs) Handles skinRibbonGalleryBarItem.GalleryItemClick
         Program.AppConfig.Theme = e.Item.Caption
         Program.SaveConfig(Program.AppConfig)
+    End Sub
+
+    Private Sub mnKategoriAsset_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnKategoriAsset.ItemClick
+        Dim frm As frmDaftarKategoriAsset = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is frmDaftarKategoriAsset Then
+                frm = TryCast(ctl, frmDaftarKategoriAsset)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New frmDaftarKategoriAsset() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
+    End Sub
+
+    Private Sub mnAssets_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnAssets.ItemClick
+
+    End Sub
+
+    Private Sub mnRuangan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnRuangan.ItemClick
+
     End Sub
 End Class

@@ -6,10 +6,12 @@ Imports DevExpress.Skins
 Imports DevExpress.UserSkins
 Imports Newtonsoft.Json
 Imports Serilog
+Imports Siaga.App.Data.Entity
 
 Public Class Program
     Public Shared AppConfig As New Model.AppConfig With {.Theme = "Office 2016 Colorful", .DBConfig = New Model.DBConfig With {.Server = "127.0.0.1", .UserID = "root", .Password = "", .Timeout = 60}}
     Public Shared FolderApp As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Siaga.App")
+    Public Shared UserLogin As Pengguna
 
     <STAThread()>
     Public Shared Sub Main()

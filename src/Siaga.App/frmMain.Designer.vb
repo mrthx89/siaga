@@ -25,6 +25,7 @@ Partial Class frmMain
     ''' </summary>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.tabbedView = New DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(Me.components)
         Me.ribbonControl = New DevExpress.XtraBars.Ribbon.RibbonControl()
         Me.skinRibbonGalleryBarItem = New DevExpress.XtraBars.SkinRibbonGalleryBarItem()
@@ -32,7 +33,17 @@ Partial Class frmMain
         Me.customersBarButtonItem = New DevExpress.XtraBars.BarButtonItem()
         Me.mnLogInOut = New DevExpress.XtraBars.BarButtonItem()
         Me.mnSetting = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnServer = New DevExpress.XtraBars.BarStaticItem()
+        Me.mnStatusUser = New DevExpress.XtraBars.BarStaticItem()
+        Me.mnKategoriAsset = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnAssets = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnRuangan = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnPemindahan = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnPemutihan = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage2 = New DevExpress.XtraBars.Ribbon.RibbonPage()
+        Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup3 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
+        Me.RibbonPageGroup4 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPage1 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup1 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.ribbonPageGroup = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -51,9 +62,9 @@ Partial Class frmMain
         '
         Me.ribbonControl.ApplicationCaption = "Siaga.App"
         Me.ribbonControl.ExpandCollapseItem.Id = 0
-        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting})
+        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting, Me.mnServer, Me.mnStatusUser, Me.mnKategoriAsset, Me.mnAssets, Me.mnRuangan, Me.mnPemindahan, Me.mnPemutihan})
         Me.ribbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonControl.MaxItemId = 48
+        Me.ribbonControl.MaxItemId = 55
         Me.ribbonControl.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always
         Me.ribbonControl.Name = "ribbonControl"
         Me.ribbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage2, Me.RibbonPage1})
@@ -96,11 +107,79 @@ Partial Class frmMain
         Me.mnSetting.Name = "mnSetting"
         Me.mnSetting.Visibility = DevExpress.XtraBars.BarItemVisibility.Never
         '
+        'mnServer
+        '
+        Me.mnServer.Caption = "Server : (none)"
+        Me.mnServer.Id = 48
+        Me.mnServer.ImageOptions.SvgImage = CType(resources.GetObject("mnServer.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.mnServer.Name = "mnServer"
+        '
+        'mnStatusUser
+        '
+        Me.mnStatusUser.Caption = "Username : (none)"
+        Me.mnStatusUser.Id = 49
+        Me.mnStatusUser.ImageOptions.SvgImage = CType(resources.GetObject("mnStatusUser.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
+        Me.mnStatusUser.Name = "mnStatusUser"
+        '
+        'mnKategoriAsset
+        '
+        Me.mnKategoriAsset.Caption = "Kategori Assets"
+        Me.mnKategoriAsset.Id = 50
+        Me.mnKategoriAsset.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Category
+        Me.mnKategoriAsset.Name = "mnKategoriAsset"
+        '
+        'mnAssets
+        '
+        Me.mnAssets.Caption = "Assets"
+        Me.mnAssets.Id = 51
+        Me.mnAssets.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Assets
+        Me.mnAssets.Name = "mnAssets"
+        '
+        'mnRuangan
+        '
+        Me.mnRuangan.Caption = "Ruangan"
+        Me.mnRuangan.Id = 52
+        Me.mnRuangan.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Lokasi
+        Me.mnRuangan.Name = "mnRuangan"
+        '
+        'mnPemindahan
+        '
+        Me.mnPemindahan.Caption = "Pemindahan"
+        Me.mnPemindahan.Id = 53
+        Me.mnPemindahan.Name = "mnPemindahan"
+        '
+        'mnPemutihan
+        '
+        Me.mnPemutihan.Caption = "Pemutihan"
+        Me.mnPemutihan.Id = 54
+        Me.mnPemutihan.Name = "mnPemutihan"
+        '
         'RibbonPage2
         '
+        Me.RibbonPage2.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.RibbonPageGroup3, Me.RibbonPageGroup4})
         Me.RibbonPage2.Name = "RibbonPage2"
         Me.RibbonPage2.Text = "Menu Utama"
         Me.RibbonPage2.Visible = False
+        '
+        'RibbonPageGroup2
+        '
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.mnKategoriAsset)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.mnAssets)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.mnRuangan)
+        Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
+        Me.RibbonPageGroup2.Text = "Master"
+        '
+        'RibbonPageGroup3
+        '
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.mnPemindahan)
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.mnPemutihan)
+        Me.RibbonPageGroup3.Name = "RibbonPageGroup3"
+        Me.RibbonPageGroup3.Text = "Transaksi"
+        '
+        'RibbonPageGroup4
+        '
+        Me.RibbonPageGroup4.Name = "RibbonPageGroup4"
+        Me.RibbonPageGroup4.Text = "Laporan"
         '
         'RibbonPage1
         '
@@ -125,6 +204,8 @@ Partial Class frmMain
         '
         'ribbonStatusBar
         '
+        Me.ribbonStatusBar.ItemLinks.Add(Me.mnServer)
+        Me.ribbonStatusBar.ItemLinks.Add(Me.mnStatusUser)
         Me.ribbonStatusBar.Location = New System.Drawing.Point(0, 721)
         Me.ribbonStatusBar.Name = "ribbonStatusBar"
         Me.ribbonStatusBar.Ribbon = Me.ribbonControl
@@ -169,4 +250,14 @@ Partial Class frmMain
     Friend WithEvents RibbonPageGroup1 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents mnSetting As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPage2 As DevExpress.XtraBars.Ribbon.RibbonPage
+    Friend WithEvents mnServer As DevExpress.XtraBars.BarStaticItem
+    Friend WithEvents mnStatusUser As DevExpress.XtraBars.BarStaticItem
+    Friend WithEvents mnKategoriAsset As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnAssets As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnRuangan As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnPemindahan As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnPemutihan As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents RibbonPageGroup3 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents RibbonPageGroup4 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
 End Class
