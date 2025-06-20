@@ -53,6 +53,7 @@ Public Class Program
             Application.Run(New frmMain())
         Catch ex As Exception
             Log.Error(ex, "Error : " & ex.Message)
+            DevExpress.XtraEditors.XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             Log.CloseAndFlush()
         End Try

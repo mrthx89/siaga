@@ -160,9 +160,18 @@
     <Compile Include="Data\ApplicationDbContext.vb" />
     <Compile Include="Data\Entity\DetailAsset.vb" />
     <Compile Include="Data\Entity\Asset.vb" />
+    <Compile Include="Data\Entity\HistoryDetailAsset.vb" />
+    <Compile Include="Data\Entity\JenisTransaksi.vb" />
     <Compile Include="Data\Entity\KategoriAsset.vb" />
+    <Compile Include="Data\Entity\Pemakaian.vb" />
     <Compile Include="Data\Entity\Ruangan.vb" />
     <Compile Include="Data\Entity\Pengguna.vb" />
+    <Compile Include="frmDaftarRuangan.Designer.vb">
+      <DependentUpon>frmDaftarRuangan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDaftarRuangan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDaftarKategoriAsset.Designer.vb">
       <DependentUpon>frmDaftarKategoriAsset.vb</DependentUpon>
     </Compile>
@@ -173,6 +182,12 @@
       <DependentUpon>frmDashboard.vb</DependentUpon>
     </Compile>
     <Compile Include="frmDashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntriKategoriAsset.Designer.vb">
+      <DependentUpon>frmEntriKategoriAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntriKategoriAsset.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLogin.Designer.vb">
@@ -199,24 +214,41 @@
       <DependentUpon>202506191533514_Assets2.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202506191533514_Assets2.vb" />
+    <Compile Include="Migrations\202506200055544_Ruangan.designer.vb">
+      <DependentUpon>202506200055544_Ruangan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506200055544_Ruangan.vb" />
+    <Compile Include="Migrations\202506200334324_PemakaianHistoryAssets.designer.vb">
+      <DependentUpon>202506200334324_PemakaianHistoryAssets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506200334324_PemakaianHistoryAssets.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\AppConfig.vb" />
+    <Compile Include="Model\Enum.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Repository\Ruangan.vb" />
     <Compile Include="Repository\KategoriAsset.vb" />
     <Compile Include="Repository\Pengguna.vb" />
+    <Compile Include="Services\IRuangan.vb" />
     <Compile Include="Services\IKategoriAsset.vb" />
     <Compile Include="Services\IPengguna.vb" />
     <Compile Include="Utils\Program.vb" />
     <Compile Include="Utils\Utils.vb" />
+    <EmbeddedResource Include="frmDaftarRuangan.resx">
+      <DependentUpon>frmDaftarRuangan.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDaftarKategoriAsset.resx">
       <DependentUpon>frmDaftarKategoriAsset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDashboard.resx">
       <DependentUpon>frmDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntriKategoriAsset.resx">
+      <DependentUpon>frmEntriKategoriAsset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
@@ -233,6 +265,13 @@
     <EmbeddedResource Include="Migrations\202506191533514_Assets2.resx">
       <DependentUpon>202506191533514_Assets2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506200055544_Ruangan.resx">
+      <DependentUpon>202506200055544_Ruangan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506200334324_PemakaianHistoryAssets.resx">
+      <DependentUpon>202506200334324_PemakaianHistoryAssets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -246,6 +285,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.KategoriAsset.datasource" />
+    <None Include="My Project\DataSources\Siaga.App.Data.Entity.Ruangan.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>

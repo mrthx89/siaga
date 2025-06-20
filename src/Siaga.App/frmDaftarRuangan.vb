@@ -2,62 +2,62 @@
 Imports DevExpress.Utils
 Imports Serilog
 
-Public Class frmDaftarKategoriAsset
-    Public Property Rep As Services.IKategoriAsset = New Repository.KategoriAsset()
+Public Class frmDaftarRuangan
+    Public Property Rep As Services.IRuangan = New Repository.Ruangan()
 
     Private Sub mnBaru_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
         mnBaru.Enabled = False
-        Using frm As New frmEntriKategoriAsset([Enum].PTipe.Create, New Data.Entity.KategoriAsset())
-            Try
-                If (frm.ShowDialog(Me) = DialogResult.OK) Then
-                    mnSegarkan.PerformClick()
+        'Using frm As New frmEntriRuangan([Enum].PTipe.Create, New Data.Entity.Ruangan())
+        '    Try
+        '        If (frm.ShowDialog(Me) = DialogResult.OK) Then
+        '            mnSegarkan.PerformClick()
 
-                    With GridView1
-                        .ClearSelection()
-                        .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
-                        .SelectRow(.FocusedRowHandle)
-                        .MakeRowVisible(.FocusedRowHandle)
-                    End With
-                End If
-            Catch ex As Exception
-                Log.Error(ex, "Error : " & ex.Message)
-                XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End Using
+        '            With GridView1
+        '                .ClearSelection()
+        '                .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
+        '                .SelectRow(.FocusedRowHandle)
+        '                .MakeRowVisible(.FocusedRowHandle)
+        '            End With
+        '        End If
+        '    Catch ex As Exception
+        '        Log.Error(ex, "Error : " & ex.Message)
+        '        XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    End Try
+        'End Using
         mnBaru.Enabled = True
     End Sub
 
     Private Sub mnUbah_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnUbah.ItemClick
         mnUbah.Enabled = False
-        If (GridView1.FocusedRowHandle >= 0) Then
-            Using frm As New frmEntriKategoriAsset([Enum].PTipe.Edit, TryCast(KategoriAssetBindingSource.Current, Data.Entity.KategoriAsset))
-                Try
-                    If (frm.ShowDialog(Me) = DialogResult.OK) Then
-                        mnSegarkan.PerformClick()
+        'If (GridView1.FocusedRowHandle >= 0) Then
+        '    Using frm As New frmEntriRuangan([Enum].PTipe.Edit, TryCast(RuanganBindingSource.Current, Data.Entity.Ruangan))
+        '        Try
+        '            If (frm.ShowDialog(Me) = DialogResult.OK) Then
+        '                mnSegarkan.PerformClick()
 
-                        With GridView1
-                            .ClearSelection()
-                            .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
-                            .SelectRow(.FocusedRowHandle)
-                            .MakeRowVisible(.FocusedRowHandle)
-                        End With
-                    End If
-                Catch ex As Exception
-                    Log.Error(ex, "Error : " & ex.Message)
-                    XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            End Using
-        End If
+        '                With GridView1
+        '                    .ClearSelection()
+        '                    .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
+        '                    .SelectRow(.FocusedRowHandle)
+        '                    .MakeRowVisible(.FocusedRowHandle)
+        '                End With
+        '            End If
+        '        Catch ex As Exception
+        '            Log.Error(ex, "Error : " & ex.Message)
+        '            XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '        End Try
+        '    End Using
+        'End If
         mnUbah.Enabled = True
     End Sub
 
     Private Sub mnHapus_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
         mnHapus.Enabled = False
         If (GridView1.FocusedRowHandle >= 0) Then
-            Dim KategoriAssets As Data.Entity.KategoriAsset = TryCast(KategoriAssetBindingSource.Current, Data.Entity.KategoriAsset)
-            Dim dialog = XtraMessageBox.Show($"Yakin ingin menghapus data {KategoriAssets.nama_kategori} ini?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            Dim Ruangans As Data.Entity.Ruangan = TryCast(RuanganBindingSource.Current, Data.Entity.Ruangan)
+            Dim dialog = XtraMessageBox.Show($"Yakin ingin menghapus data {Ruangans.nama_ruangan} ini?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If (dialog = DialogResult.Yes) Then
-                Dim result = Rep.Delete(KategoriAssets)
+                Dim result = Rep.Delete(Ruangans)
                 If (result.Item1) Then
                     mnSegarkan.PerformClick()
                 Else
@@ -71,7 +71,7 @@ Public Class frmDaftarKategoriAsset
     Private Sub mnSegarkan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSegarkan.ItemClick
         Dim data = Rep.GetAll()
         If (data.Item1) Then
-            KategoriAssetBindingSource.DataSource = data.Item3
+            RuanganBindingSource.DataSource = data.Item3
         Else
             XtraMessageBox.Show(data.Item2, Application.ProductName)
         End If
@@ -101,7 +101,7 @@ Public Class frmDaftarKategoriAsset
         mnExportExcel.Enabled = True
     End Sub
 
-    Private Sub frmDaftarKategoriAsset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmDaftarRuangan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mnSegarkan.PerformClick()
     End Sub
 

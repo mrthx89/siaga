@@ -22,6 +22,12 @@ Namespace Data
 
         Public Property Ruangans As DbSet(Of Ruangan)
 
+        Public Property Pemakaians As DbSet(Of Pemakaian)
+
+        Public Property HistoryDetailAssets As DbSet(Of HistoryDetailAsset)
+
+        Public Property JenisTransaksies As DbSet(Of JenisTransaksi)
+
         Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
             MyBase.OnModelCreating(modelBuilder)
             ' Konfigurasi tambahan jika perlu
@@ -52,6 +58,13 @@ Namespace Data
                 .HasColumnAnnotation(
                     "Index",
                     New IndexAnnotation(New IndexAttribute("ix_ruangan_kd_ruangan") With {.IsUnique = True})
+                )
+
+            modelBuilder.Entity(Of JenisTransaksi)() _
+                .Property(Function(p) p.kd_jenis_transaksi) _
+                .HasColumnAnnotation(
+                    "Index",
+                    New IndexAnnotation(New IndexAttribute("ix_jenis_transaksi_kd_jenis_transaksi") With {.IsUnique = True})
                 )
         End Sub
     End Class

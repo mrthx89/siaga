@@ -26,8 +26,11 @@ Namespace Data.Entity
         <MaxLength(255)>
         Public Property kondisi As String
 
-        ' ✅ Relasi ke KategoriAsset (Foreign Key)
+        ' ✅ Relasi ke Asset (Foreign Key)
         <ForeignKey("id_asset")>
         Public Overridable Property Asset As Asset
+
+        Public Overridable Property Pemakaians As ICollection(Of Pemakaian)
+        Public Overridable Property HistoryDetailAssets As ICollection(Of HistoryDetailAsset)
     End Class
 End Namespace
