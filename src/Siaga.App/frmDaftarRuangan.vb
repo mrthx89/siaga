@@ -7,47 +7,47 @@ Public Class frmDaftarRuangan
 
     Private Sub mnBaru_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
         mnBaru.Enabled = False
-        'Using frm As New frmEntriRuangan([Enum].PTipe.Create, New Data.Entity.Ruangan())
-        '    Try
-        '        If (frm.ShowDialog(Me) = DialogResult.OK) Then
-        '            mnSegarkan.PerformClick()
+        Using frm As New frmEntriRuangan([Enum].PTipe.Create, New Data.Entity.Ruangan())
+            Try
+                If (frm.ShowDialog(Me) = DialogResult.OK) Then
+                    mnSegarkan.PerformClick()
 
-        '            With GridView1
-        '                .ClearSelection()
-        '                .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
-        '                .SelectRow(.FocusedRowHandle)
-        '                .MakeRowVisible(.FocusedRowHandle)
-        '            End With
-        '        End If
-        '    Catch ex As Exception
-        '        Log.Error(ex, "Error : " & ex.Message)
-        '        XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    End Try
-        'End Using
+                    With GridView1
+                        .ClearSelection()
+                        .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
+                        .SelectRow(.FocusedRowHandle)
+                        .MakeRowVisible(.FocusedRowHandle)
+                    End With
+                End If
+            Catch ex As Exception
+                Log.Error(ex, "Error : " & ex.Message)
+                XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Using
         mnBaru.Enabled = True
     End Sub
 
     Private Sub mnUbah_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnUbah.ItemClick
         mnUbah.Enabled = False
-        'If (GridView1.FocusedRowHandle >= 0) Then
-        '    Using frm As New frmEntriRuangan([Enum].PTipe.Edit, TryCast(RuanganBindingSource.Current, Data.Entity.Ruangan))
-        '        Try
-        '            If (frm.ShowDialog(Me) = DialogResult.OK) Then
-        '                mnSegarkan.PerformClick()
+        If (GridView1.FocusedRowHandle >= 0) Then
+            Using frm As New frmEntriRuangan([Enum].PTipe.Edit, TryCast(RuanganBindingSource.Current, Data.Entity.Ruangan))
+                Try
+                    If (frm.ShowDialog(Me) = DialogResult.OK) Then
+                        mnSegarkan.PerformClick()
 
-        '                With GridView1
-        '                    .ClearSelection()
-        '                    .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
-        '                    .SelectRow(.FocusedRowHandle)
-        '                    .MakeRowVisible(.FocusedRowHandle)
-        '                End With
-        '            End If
-        '        Catch ex As Exception
-        '            Log.Error(ex, "Error : " & ex.Message)
-        '            XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '        End Try
-        '    End Using
-        'End If
+                        With GridView1
+                            .ClearSelection()
+                            .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
+                            .SelectRow(.FocusedRowHandle)
+                            .MakeRowVisible(.FocusedRowHandle)
+                        End With
+                    End If
+                Catch ex As Exception
+                    Log.Error(ex, "Error : " & ex.Message)
+                    XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End If
         mnUbah.Enabled = True
     End Sub
 

@@ -184,6 +184,12 @@
     <Compile Include="frmDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmEntriRuangan.Designer.vb">
+      <DependentUpon>frmEntriRuangan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntriRuangan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmEntriKategoriAsset.Designer.vb">
       <DependentUpon>frmEntriKategoriAsset.vb</DependentUpon>
     </Compile>
@@ -247,6 +253,9 @@
     <EmbeddedResource Include="frmDashboard.resx">
       <DependentUpon>frmDashboard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEntriRuangan.resx">
+      <DependentUpon>frmEntriRuangan.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEntriKategoriAsset.resx">
       <DependentUpon>frmEntriKategoriAsset.vb</DependentUpon>
     </EmbeddedResource>
@@ -271,7 +280,6 @@
     <EmbeddedResource Include="Migrations\202506200334324_PemakaianHistoryAssets.resx">
       <DependentUpon>202506200334324_PemakaianHistoryAssets.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
