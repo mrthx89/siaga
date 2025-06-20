@@ -208,6 +208,12 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmUbahPassword.Designer.vb">
+      <DependentUpon>frmUbahPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUbahPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Migrations\202506191506206_InitialCreate.designer.vb">
       <DependentUpon>202506191506206_InitialCreate.vb</DependentUpon>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUbahPassword.resx">
+      <DependentUpon>frmUbahPassword.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506191506206_InitialCreate.resx">
       <DependentUpon>202506191506206_InitialCreate.vb</DependentUpon>

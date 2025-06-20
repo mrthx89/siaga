@@ -117,4 +117,19 @@ Public Class frmMain
         frm.Show()
         frm.Focus()
     End Sub
+
+    Private Sub mnStatusUser_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnStatusUser.ItemClick
+        mnStatusUser.Enabled = False
+        Using frm As New frmUbahPassword()
+            Try
+                If (frm.ShowDialog(Me) = DialogResult.OK) Then
+                    Application.Restart()
+                End If
+            Catch ex As Exception
+                Log.Logger.Error(ex, "Info Kesalahan : " & ex.Message)
+                XtraMessageBox.Show("Info Kesalahan : " & ex.Message)
+            End Try
+        End Using
+        mnStatusUser.Enabled = True
+    End Sub
 End Class

@@ -117,6 +117,7 @@ Partial Class frmMain
         'mnStatusUser
         '
         Me.mnStatusUser.Caption = "Username : (none)"
+        Me.mnStatusUser.Hint = "Klik untuk mengubah password"
         Me.mnStatusUser.Id = 49
         Me.mnStatusUser.ImageOptions.SvgImage = CType(resources.GetObject("mnStatusUser.ImageOptions.SvgImage"), DevExpress.Utils.Svg.SvgImage)
         Me.mnStatusUser.Name = "mnStatusUser"
