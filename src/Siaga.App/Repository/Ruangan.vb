@@ -11,11 +11,11 @@ Namespace Repository
 
         Public ReadOnly DbContext As New Data.ApplicationDbContext()
 
-        Public Function GetAll() As Tuple(Of Boolean, String, List(Of Entity.Ruangan)) Implements IRuangan.GetAll
+        Public Function GetAll(All As Boolean) As Tuple(Of Boolean, String, List(Of Entity.Ruangan)) Implements IRuangan.GetAll
             Dim hasil As New Tuple(Of Boolean, String, List(Of Entity.Ruangan))(False, String.Empty, Nothing)
             Using dlg As New WaitDialogForm("Sedang merefresh data ...", "Mohon tunggu sebentar")
                 Try
-                    Dim result = DbContext.Ruangans.AsNoTracking.ToList()
+                    Dim result = DbContext.Ruangans.AsNoTracking.Where(Function(m) All OrElse (m.kd_ruangan.ToLower() <> "0000-perolehan".ToLower() AndAlso m.kd_ruangan.ToLower() <> "0000-pemutihan".ToLower())).ToList()
                     hasil = New Tuple(Of Boolean, String, List(Of Entity.Ruangan))(True, "Data ditemukan", result)
                 Catch ex As Exception
                     Log.Error(ex, "Error : " & ex.Message)
@@ -135,7 +135,7 @@ Namespace Repository
             Dim hasil As New Tuple(Of Boolean, String)(False, String.Empty)
             Using dlg As New WaitDialogForm("Sedang menghapus data ...", "Mohon tunggu sebentar")
                 Try
-                    Dim result = DbContext.Ruangans.FirstOrDefault(Function(m) m.id = Data.id)
+                    Dim result = DbContext.Ruangans.FirstOrDefault(Function(m) m.id = Data.id AndAlso (m.kd_ruangan.ToLower() <> "0000-perolehan".ToLower() AndAlso m.kd_ruangan.ToLower() <> "0000-pemutihan".ToLower()))
                     If (result IsNot Nothing) Then
                         Dim dipakaiPemakaian = DbContext.Pemakaians.Where(Function(m) m.id_ruangan = result.id).ToList()
                         Dim dipakaiHistory = DbContext.HistoryDetailAssets.Where(Function(m) m.id_ruangan = result.id).ToList()

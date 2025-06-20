@@ -69,7 +69,7 @@ Public Class frmDaftarRuangan
     End Sub
 
     Private Sub mnSegarkan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSegarkan.ItemClick
-        Dim data = Rep.GetAll()
+        Dim data = Rep.GetAll(False)
         If (data.Item1) Then
             RuanganBindingSource.DataSource = data.Item3
         Else

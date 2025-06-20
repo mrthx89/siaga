@@ -68,6 +68,30 @@ Namespace Migrations
                     }
                 )
             End If
+
+            If Not context.Ruangans.Any(Function(p) p.kd_ruangan.ToLower() = "00000-perolehan".ToLower()) Then
+                context.Ruangans.AddOrUpdate(
+                    Function(p) p.kd_ruangan, ' digunakan sebagai identifikasi unik
+                    New Data.Entity.Ruangan With {
+                        .id = Guid.Parse("2B82EEF4-CB89-461D-9749-00E71A469078"),
+                        .kd_ruangan = "00000-Perolehan",
+                        .nama_ruangan = "Perolehan",
+                        .keterangan = ""
+                    }
+                )
+            End If
+
+            If Not context.Ruangans.Any(Function(p) p.kd_ruangan.ToLower() = "99999-pemutihan".ToLower()) Then
+                context.Ruangans.AddOrUpdate(
+                    Function(p) p.kd_ruangan, ' digunakan sebagai identifikasi unik
+                    New Data.Entity.Ruangan With {
+                        .id = Guid.Parse("69FFFFCC-A79A-4E7E-B72C-C291729DF0BE"),
+                        .kd_ruangan = "99999-Pemutihan",
+                        .nama_ruangan = "Pemutihan",
+                        .keterangan = ""
+                    }
+                )
+            End If
         End Sub
     End Class
 
