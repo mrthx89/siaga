@@ -104,6 +104,17 @@ Public Class frmMain
     End Sub
 
     Private Sub mnRuangan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnRuangan.ItemClick
-
+        Dim frm As frmDaftarRuangan = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is frmDaftarRuangan Then
+                frm = TryCast(ctl, frmDaftarRuangan)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New frmDaftarRuangan() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
     End Sub
 End Class
