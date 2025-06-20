@@ -20,7 +20,8 @@ Partial Class frmLogin
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim EditorButtonImageOptions2 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim EditorButtonImageOptions1 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
@@ -88,9 +89,9 @@ Partial Class frmLogin
         Me.txtPassword.Location = New System.Drawing.Point(66, 198)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Properties.AutoHeight = False
-        EditorButtonImageOptions2.SvgImage = Global.Siaga.App.My.Resources.Resources.show
-        EditorButtonImageOptions2.SvgImageSize = New System.Drawing.Size(20, 20)
-        Me.txtPassword.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(EditorButtonImageOptions2, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, Nothing)})
+        EditorButtonImageOptions1.SvgImage = Global.Siaga.App.My.Resources.Resources.show
+        EditorButtonImageOptions1.SvgImageSize = New System.Drawing.Size(20, 20)
+        Me.txtPassword.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(EditorButtonImageOptions1, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, Nothing)})
         Me.txtPassword.Properties.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtPassword.Properties.MaxLength = 50
         Me.txtPassword.Properties.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -134,6 +135,7 @@ Partial Class frmLogin
         Me.Controls.Add(Me.LabelControl1)
         Me.Controls.Add(Me.txtPassword)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmLogin"

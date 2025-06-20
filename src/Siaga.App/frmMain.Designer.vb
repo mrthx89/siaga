@@ -61,6 +61,7 @@ Partial Class frmMain
         'ribbonControl
         '
         Me.ribbonControl.ApplicationCaption = "Siaga.App"
+        Me.ribbonControl.ApplicationIcon = Global.Siaga.App.My.Resources.Resources.Logo
         Me.ribbonControl.ExpandCollapseItem.Id = 0
         Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting, Me.mnServer, Me.mnStatusUser, Me.mnKategoriAsset, Me.mnAssets, Me.mnRuangan, Me.mnPemindahan, Me.mnPemutihan})
         Me.ribbonControl.Location = New System.Drawing.Point(0, 0)
@@ -223,6 +224,7 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(1173, 752)
         Me.Controls.Add(Me.ribbonStatusBar)
         Me.Controls.Add(Me.ribbonControl)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.Name = "frmMain"
         Me.Ribbon = Me.ribbonControl

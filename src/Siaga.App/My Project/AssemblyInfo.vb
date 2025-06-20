@@ -6,12 +6,12 @@ Imports System.Runtime.InteropServices
 ' set of attributes. Change these attribute values to modify the information
 ' associated with an assembly.
 <Assembly: AssemblyTitle("Siaga.App")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyDescription("Aplikasi Manajemen Asset")>
 <Assembly: AssemblyConfiguration("")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyCompany("http://www.yhdev.click")>
 <Assembly: AssemblyProduct("Siaga.App")>
 <Assembly: AssemblyCopyright("Copyright © YH.Dev 2025")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("Copyright © YH.Dev 2025")>
 <Assembly: AssemblyCulture("")>
 
 ' Setting ComVisible to false makes the types in this assembly not visible 

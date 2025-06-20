@@ -48,6 +48,9 @@
   <PropertyGroup>
     <StartupObject>Sub Main</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>wcr92-w7v0r-001.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
@@ -343,6 +346,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Lokasi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo.png" />
+    <Content Include="wcr92-w7v0r-001.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
