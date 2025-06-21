@@ -12,7 +12,7 @@ Public Class frmLogin
 
     Private Sub TextEdit2_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtPassword.ButtonClick
         If (e.Button.Index = 0) Then
-            If (txtPassword.Properties.PasswordChar.ToString().Length >= 1) Then
+            If (txtPassword.Properties.PasswordChar <> CChar(String.Empty)) Then
                 txtPassword.Properties.PasswordChar = CChar(String.Empty)
                 txtPassword.Properties.Buttons(0).ImageOptions.SvgImage = My.Resources.hide
             Else

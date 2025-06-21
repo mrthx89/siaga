@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.XtraEditors
+Imports DevExpress.XtraEditors.Controls
 
 Public Class frmUbahPassword
     Private ReadOnly Rep As Services.IPengguna = New Repository.Pengguna()
@@ -36,7 +37,15 @@ Public Class frmUbahPassword
         End If
     End Sub
 
-    Private Sub frmUbahPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+    Private Sub txtPasswordLama_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txtPasswordLama.ButtonClick, txtPasswordBaru.ButtonClick, txtPasswordBaru2.ButtonClick
+        If (e.Button.Index = 0) Then
+            If (TryCast(sender, ButtonEdit).Properties.PasswordChar <> CChar(String.Empty)) Then
+                TryCast(sender, ButtonEdit).Properties.PasswordChar = CChar(String.Empty)
+                TryCast(sender, ButtonEdit).Properties.Buttons(0).ImageOptions.SvgImage = My.Resources.hide
+            Else
+                TryCast(sender, ButtonEdit).Properties.PasswordChar = "*"c
+                TryCast(sender, ButtonEdit).Properties.Buttons(0).ImageOptions.SvgImage = My.Resources.show
+            End If
+        End If
     End Sub
 End Class
