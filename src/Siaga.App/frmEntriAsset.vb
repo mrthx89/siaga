@@ -120,6 +120,17 @@ Public Class frmEntriAsset
                     GridView1.FocusedRowHandle = GridView1.RowCount - 1
                     GridView1.MakeRowVisible(GridView1.FocusedRowHandle)
                 End If
+                Dim maxData = Model.DetailAssets.Where(Function(m) m.barcode.Length > 3 AndAlso IsNumeric(m.barcode.Substring(m.barcode.Length - 3, 3))).Max(Function(m) m.barcode)
+                If (maxData IsNot Nothing AndAlso maxData.Length >= 1) Then
+                    maxData = maxData.Substring(maxData.Length - 3, 3)
+                End If
+                Dim nextData As Integer = 0
+                If (IsNumeric(maxData)) Then
+                    Integer.TryParse(maxData, nextData)
+                End If
+                nextData += 1
+                Dim newBarcode As String = Model.kd_asset & "-" & nextData.ToString("000")
+                GridView1.SetRowCellValue(GridView1.FocusedRowHandle, colbarcode, newBarcode)
             End If
         End If
     End Sub

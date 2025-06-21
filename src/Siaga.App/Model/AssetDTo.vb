@@ -28,7 +28,7 @@ Namespace Model
             Me.sumber = String.Empty
             Me.tgl_perolehan = DateTime.Now
             Me.harga_beli = 0
-            Me.barcode = Me.id.ToString()
+            Me.barcode = String.Empty
         End Sub
         Public Property id As Guid
 

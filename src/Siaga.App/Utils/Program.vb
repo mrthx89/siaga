@@ -10,7 +10,8 @@ Imports Siaga.App.Data.Entity
 
 Public Class Program
     Public Shared AppConfig As New Model.AppConfig With {.Theme = "Office 2016 Colorful", .DBConfig = New Model.DBConfig With {.Server = "127.0.0.1", .UserID = "root", .Password = "", .Timeout = 60}}
-    Public Shared FolderApp As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Siaga.App")
+    Public Shared FolderApp As String = IO.Path.Combine(Environment.CurrentDirectory)
+    Public Shared FolderTempApp As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Siaga.App")
     Public Shared UserLogin As Pengguna
 
     <STAThread()>
@@ -22,7 +23,7 @@ Public Class Program
             Log.Logger = New LoggerConfiguration() _
             .MinimumLevel.Debug() _
             .WriteTo.Console() _
-            .WriteTo.File(IO.Path.Combine(FolderApp, "Logs", "log-.txt"),
+            .WriteTo.File(IO.Path.Combine(FolderTempApp, "Logs", "log-.txt"),
                           rollingInterval:=RollingInterval.Day,
                           outputTemplate:="{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}") _
             .CreateLogger()
@@ -61,15 +62,17 @@ Public Class Program
 
     Private Shared Sub CreateFolder()
         If Not IO.Directory.Exists(FolderApp) Then IO.Directory.CreateDirectory(FolderApp)
-        If Not IO.Directory.Exists(IO.Path.Combine(FolderApp, "Logs")) Then IO.Directory.CreateDirectory(IO.Path.Combine(FolderApp, "Logs"))
+        If Not IO.Directory.Exists(FolderTempApp) Then IO.Directory.CreateDirectory(FolderTempApp)
+        If Not IO.Directory.Exists(IO.Path.Combine(FolderTempApp, "Logs")) Then IO.Directory.CreateDirectory(IO.Path.Combine(FolderTempApp, "Logs"))
+        If Not IO.Directory.Exists(IO.Path.Combine(FolderTempApp, "System")) Then IO.Directory.CreateDirectory(IO.Path.Combine(FolderTempApp, "System"))
         If Not IO.Directory.Exists(IO.Path.Combine(FolderApp, "System")) Then IO.Directory.CreateDirectory(IO.Path.Combine(FolderApp, "System"))
         If Not IO.Directory.Exists(IO.Path.Combine(FolderApp, "System", "Layouts")) Then IO.Directory.CreateDirectory(IO.Path.Combine(FolderApp, "System", "Layouts"))
         If Not IO.Directory.Exists(IO.Path.Combine(FolderApp, "Report")) Then IO.Directory.CreateDirectory(IO.Path.Combine(FolderApp, "Report"))
     End Sub
 
     Public Shared Sub OpenConfig()
-        If (IO.File.Exists(IO.Path.Combine(FolderApp, "System", "AppConfig.json"))) Then
-            AppConfig = JsonConvert.DeserializeObject(Of Model.AppConfig)(IO.File.ReadAllText(IO.Path.Combine(FolderApp, "System", "AppConfig.json")))
+        If (IO.File.Exists(IO.Path.Combine(FolderTempApp, "System", "AppConfig.json"))) Then
+            AppConfig = JsonConvert.DeserializeObject(Of Model.AppConfig)(IO.File.ReadAllText(IO.Path.Combine(FolderTempApp, "System", "AppConfig.json")))
         End If
 
         If (AppConfig Is Nothing OrElse
@@ -84,7 +87,7 @@ Public Class Program
     End Sub
 
     Public Shared Sub SaveConfig(AppConfig As Model.AppConfig)
-        Using sw As New IO.StreamWriter(IO.Path.Combine(FolderApp, "System", "AppConfig.json"), False)
+        Using sw As New IO.StreamWriter(IO.Path.Combine(FolderTempApp, "System", "AppConfig.json"), False)
             Try
                 sw.AutoFlush = True
                 sw.Write(JsonConvert.SerializeObject(AppConfig))
