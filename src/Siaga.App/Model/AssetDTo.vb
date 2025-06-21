@@ -1,10 +1,27 @@
 ﻿Imports System.ComponentModel.DataAnnotations
 Imports System.ComponentModel.DataAnnotations.Schema
 
-Namespace Data.Entity
-    <Table("detailasset")>
-    Public Class DetailAsset
-        <Key>
+Namespace Model
+    Public Class AssetDTo
+        Public Property id As Guid
+
+        <MaxLength(50)>
+        Public Property kd_asset As String
+
+        <MaxLength(100)>
+        Public Property nama_asset As String
+
+        Public Property id_kategori As Guid
+
+        Public Property nama_kategori As String
+
+        <MaxLength(255)>
+        Public Property keterangan As String
+
+        Public Property DetailAssets As List(Of DetilAssetDTo)
+    End Class
+
+    Public Class DetilAssetDTo
         Public Property id As Guid
 
         Public Property id_asset As Guid
@@ -22,12 +39,5 @@ Namespace Data.Entity
 
         <MaxLength(255)>
         Public Property kondisi As String
-
-        ' ✅ Relasi ke Asset (Foreign Key)
-        <ForeignKey("id_asset")>
-        Public Overridable Property Asset As Asset
-
-        Public Overridable Property Pemakaians As ICollection(Of Pemakaian)
-        Public Overridable Property HistoryDetailAssets As ICollection(Of HistoryDetailAsset)
     End Class
 End Namespace

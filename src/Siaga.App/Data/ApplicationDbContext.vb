@@ -16,6 +16,8 @@ Namespace Data
 
         Public Property Assets As DbSet(Of Asset)
 
+        Public Property DetailAssets As DbSet(Of DetailAsset)
+
         Public Property KategoriAssets As DbSet(Of KategoriAsset)
 
         Public Property Penggunas As DbSet(Of Pengguna)
@@ -51,6 +53,13 @@ Namespace Data
                 .HasColumnAnnotation(
                     "Index",
                     New IndexAnnotation(New IndexAttribute("ix_asset_kd_asset") With {.IsUnique = True})
+                )
+
+            modelBuilder.Entity(Of DetailAsset)() _
+                .Property(Function(p) p.barcode) _
+                .HasColumnAnnotation(
+                    "Index",
+                    New IndexAnnotation(New IndexAttribute("ix_detail_asset_barcode") With {.IsUnique = True})
                 )
 
             modelBuilder.Entity(Of Ruangan)() _

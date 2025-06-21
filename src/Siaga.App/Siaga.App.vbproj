@@ -211,6 +211,12 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSetting.Designer.vb">
+      <DependentUpon>frmSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUbahPassword.Designer.vb">
       <DependentUpon>frmUbahPassword.vb</DependentUpon>
     </Compile>
@@ -237,17 +243,24 @@
       <DependentUpon>202506200334324_PemakaianHistoryAssets.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202506200334324_PemakaianHistoryAssets.vb" />
+    <Compile Include="Migrations\202506200609370_AssetsRevisi.designer.vb">
+      <DependentUpon>202506200609370_AssetsRevisi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506200609370_AssetsRevisi.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\AppConfig.vb" />
+    <Compile Include="Model\AssetDTo.vb" />
     <Compile Include="Model\Enum.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Repository\Asset.vb" />
     <Compile Include="Repository\Ruangan.vb" />
     <Compile Include="Repository\KategoriAsset.vb" />
     <Compile Include="Repository\Pengguna.vb" />
+    <Compile Include="Services\IAsset.vb" />
     <Compile Include="Services\IRuangan.vb" />
     <Compile Include="Services\IKategoriAsset.vb" />
     <Compile Include="Services\IPengguna.vb" />
@@ -274,6 +287,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSetting.resx">
+      <DependentUpon>frmSetting.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmUbahPassword.resx">
       <DependentUpon>frmUbahPassword.vb</DependentUpon>
     </EmbeddedResource>
@@ -291,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506200334324_PemakaianHistoryAssets.resx">
       <DependentUpon>202506200334324_PemakaianHistoryAssets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506200609370_AssetsRevisi.resx">
+      <DependentUpon>202506200609370_AssetsRevisi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

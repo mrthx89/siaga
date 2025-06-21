@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.XtraEditors.Controls
 Imports DevExpress.XtraEditors
+Imports Serilog
 
 Public Class frmLogin
     Public Property FileMeet As String = IO.Path.Combine(Program.FolderApp, "System", "Logo.png")
@@ -25,6 +26,7 @@ Public Class frmLogin
         If (System.IO.File.Exists(FileMeet)) Then
             PictureEdit1.Image = Image.FromFile(FileMeet)
         End If
+        lbAppVersion.Text = $"App ver {Application.ProductVersion}"
     End Sub
 
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
@@ -49,5 +51,20 @@ Public Class frmLogin
         Else
             XtraMessageBox.Show(String.Join(Environment.NewLine, DxErrorProvider1.GetControlsWithError().Select(Function(m) DxErrorProvider1.GetError(m))), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
+    End Sub
+
+    Private Sub cmdSetting_Click(sender As Object, e As EventArgs) Handles cmdSetting.Click
+        cmdSetting.Enabled = False
+        Using frm As New frmSetting
+            Try
+                If (frm.ShowDialog(Me) = DialogResult.OK) Then
+                    Application.Restart()
+                End If
+            Catch ex As Exception
+                Log.Logger.Error(ex, "Info Kesalahan : " & ex.Message)
+                XtraMessageBox.Show("Info Kesalahan : " & ex.Message)
+            End Try
+        End Using
+        cmdSetting.Enabled = True
     End Sub
 End Class

@@ -21,14 +21,16 @@ Partial Class frmLogin
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim EditorButtonImageOptions1 As DevExpress.XtraEditors.Controls.EditorButtonImageOptions = New DevExpress.XtraEditors.Controls.EditorButtonImageOptions()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.PictureEdit1 = New DevExpress.XtraEditors.PictureEdit()
         Me.txtUserName = New DevExpress.XtraEditors.TextEdit()
         Me.txtPassword = New DevExpress.XtraEditors.ButtonEdit()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
-        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.lbAppVersion = New DevExpress.XtraEditors.LabelControl()
         Me.DxErrorProvider1 = New DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(Me.components)
+        Me.cmdSetting = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PictureEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtUserName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtPassword.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -102,31 +104,48 @@ Partial Class frmLogin
         Me.SimpleButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SimpleButton1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SimpleButton1.Appearance.Options.UseFont = True
-        Me.SimpleButton1.Location = New System.Drawing.Point(248, 230)
+        Me.SimpleButton1.Location = New System.Drawing.Point(218, 230)
         Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(75, 23)
+        Me.SimpleButton1.Size = New System.Drawing.Size(105, 31)
         Me.SimpleButton1.TabIndex = 5
         Me.SimpleButton1.Text = "&Masuk"
         '
-        'LabelControl3
+        'lbAppVersion
         '
-        Me.LabelControl3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.LabelControl3.Location = New System.Drawing.Point(12, 248)
-        Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(57, 13)
-        Me.LabelControl3.TabIndex = 6
-        Me.LabelControl3.Text = "App Ver 1.0"
+        Me.lbAppVersion.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lbAppVersion.Appearance.Options.UseTextOptions = True
+        Me.lbAppVersion.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.lbAppVersion.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical
+        Me.lbAppVersion.Location = New System.Drawing.Point(113, 114)
+        Me.lbAppVersion.Name = "lbAppVersion"
+        Me.lbAppVersion.Size = New System.Drawing.Size(100, 13)
+        Me.lbAppVersion.TabIndex = 6
+        Me.lbAppVersion.Text = "App Ver 1.0"
         '
         'DxErrorProvider1
         '
         Me.DxErrorProvider1.ContainerControl = Me
+        '
+        'cmdSetting
+        '
+        Me.cmdSetting.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmdSetting.Appearance.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSetting.Appearance.Options.UseFont = True
+        Me.cmdSetting.ImageOptions.Image = CType(resources.GetObject("cmdSetting.ImageOptions.Image"), System.Drawing.Image)
+        Me.cmdSetting.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter
+        Me.cmdSetting.Location = New System.Drawing.Point(66, 230)
+        Me.cmdSetting.Name = "cmdSetting"
+        Me.cmdSetting.Size = New System.Drawing.Size(48, 31)
+        Me.cmdSetting.TabIndex = 7
         '
         'frmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(335, 273)
-        Me.Controls.Add(Me.LabelControl3)
+        Me.Controls.Add(Me.cmdSetting)
+        Me.Controls.Add(Me.lbAppVersion)
         Me.Controls.Add(Me.SimpleButton1)
         Me.Controls.Add(Me.txtUserName)
         Me.Controls.Add(Me.PictureEdit1)
@@ -154,6 +173,7 @@ Partial Class frmLogin
     Friend WithEvents txtUserName As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txtPassword As DevExpress.XtraEditors.ButtonEdit
     Friend WithEvents SimpleButton1 As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents lbAppVersion As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DxErrorProvider1 As DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider
+    Friend WithEvents cmdSetting As DevExpress.XtraEditors.SimpleButton
 End Class
