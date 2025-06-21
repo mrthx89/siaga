@@ -166,6 +166,7 @@
     <Compile Include="Data\Entity\HistoryDetailAsset.vb" />
     <Compile Include="Data\Entity\JenisTransaksi.vb" />
     <Compile Include="Data\Entity\KategoriAsset.vb" />
+    <Compile Include="Data\Entity\Pemutihan.vb" />
     <Compile Include="Data\Entity\Pemakaian.vb" />
     <Compile Include="Data\Entity\Ruangan.vb" />
     <Compile Include="Data\Entity\Pengguna.vb" />
@@ -247,6 +248,10 @@
       <DependentUpon>202506200609370_AssetsRevisi.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202506200609370_AssetsRevisi.vb" />
+    <Compile Include="Migrations\202506211456531_Pemutihan.designer.vb">
+      <DependentUpon>202506211456531_Pemutihan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506211456531_Pemutihan.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\AppConfig.vb" />
     <Compile Include="Model\AssetDTo.vb" />
@@ -310,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506200609370_AssetsRevisi.resx">
       <DependentUpon>202506200609370_AssetsRevisi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506211456531_Pemutihan.resx">
+      <DependentUpon>202506211456531_Pemutihan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

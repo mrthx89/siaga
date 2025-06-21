@@ -133,7 +133,9 @@ Namespace Repository
         Public Function Create(Data As Model.AssetDTo) As Tuple(Of Boolean, String, Model.AssetDTo) Implements IAsset.Create
             Dim hasil As New Tuple(Of Boolean, String, Model.AssetDTo)(False, String.Empty, Nothing)
             Using dlg As New WaitDialogForm("Sedang menyimpan data ...", "Mohon tunggu sebentar")
+                Dim transaction As System.Data.Entity.DbContextTransaction = Nothing
                 Try
+                    transaction = DbContext.Database.BeginTransaction()
                     Data.id = Guid.NewGuid()
                     If (String.IsNullOrEmpty(Data.kd_asset) OrElse String.IsNullOrWhiteSpace(Data.kd_asset)) Then
                         hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Kode belum diisi.", Data)
@@ -196,8 +198,9 @@ Namespace Repository
                         Dim jenisTransaksi = DbContext.JenisTransaksies.FirstOrDefault(Function(m) m.kd_jenis_transaksi.ToLower() = "Perolehan".ToLower())
                         Dim ruangan = DbContext.Ruangans.FirstOrDefault(Function(m) m.kd_ruangan.ToLower() = "00000-Perolehan".ToLower())
                         Dim queryHapus = (From x In DbContext.HistoryDetailAssets
+                                          From a In DbContext.DetailAssets.Where(Function(m) m.id = x.id_detail_asset).DefaultIfEmpty()
                                           From d In DbContext.JenisTransaksies.Where(Function(m) m.id = x.id_jenis_transaksi).DefaultIfEmpty()
-                                          Where x.id_detail_asset = dataNew.id AndAlso d.id = jenisTransaksi.id
+                                          Where a.id_asset = dataNew.id AndAlso d.id = jenisTransaksi.id
                                           Select x)
                         DbContext.HistoryDetailAssets.RemoveRange(queryHapus)
 
@@ -212,11 +215,17 @@ Namespace Repository
                         DbContext.HistoryDetailAssets.AddRange(queryInsert)
 
                         DbContext.SaveChanges()
+                        transaction.Commit()
+                        transaction = Nothing
                         hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(True, "Data telah disimpan", Data)
                     Else
                         hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Kode sudah dipakai di master asset lain.", Nothing)
                     End If
                 Catch ex As Exception
+                    If (transaction IsNot Nothing) Then
+                        transaction.Rollback()
+                    End If
+                    transaction = Nothing
                     Log.Error(ex, "Error : " & ex.Message)
                     XtraMessageBox.Show("Info Kesalahan : " & ex.Message, Application.ProductName)
                     hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Info Kesalahan : " & ex.Message, Nothing)
@@ -228,7 +237,9 @@ Namespace Repository
         Public Function Update(Data As Model.AssetDTo) As Tuple(Of Boolean, String, Model.AssetDTo) Implements IAsset.Update
             Dim hasil As New Tuple(Of Boolean, String, Model.AssetDTo)(False, String.Empty, Nothing)
             Using dlg As New WaitDialogForm("Sedang menyimpan data ...", "Mohon tunggu sebentar")
+                Dim transaction As System.Data.Entity.DbContextTransaction = Nothing
                 Try
+                    transaction = DbContext.Database.BeginTransaction()
                     If (String.IsNullOrEmpty(Data.kd_asset) OrElse String.IsNullOrWhiteSpace(Data.kd_asset)) Then
                         hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Kode belum diisi.", Data)
                         Exit Try
@@ -237,21 +248,94 @@ Namespace Repository
                         hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Nama belum diisi.", Data)
                         Exit Try
                     End If
+                    Dim kodekategori = DbContext.KategoriAssets.AsNoTracking().FirstOrDefault(Function(m) m.id = Data.id_kategori)
+                    If (kodekategori Is Nothing) Then
+                        hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Kategori tidak ditemukan.", Data)
+                        Exit Try
+                    End If
+                    If (Data.DetailAssets Is Nothing OrElse Data.DetailAssets.Count = 0) Then
+                        hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Detil Assets tidak ditemukan.", Data)
+                        Exit Try
+                    Else
+                        For Each item In Data.DetailAssets
+                            If (item.tgl_perolehan <= DateTime.Parse("1900-01-01")) Then
+                                hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Tanggal Perolehan belum diisi.", Data)
+                                Exit Try
+                            End If
+                            If (String.IsNullOrEmpty(item.barcode) OrElse String.IsNullOrWhiteSpace(item.barcode)) Then
+                                hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Barcode Asset belum diisi.", Data)
+                                Exit Try
+                            End If
+                            Dim cekBarcodeSudahDipakai = DbContext.DetailAssets.Where(Function(m) m.id <> item.id AndAlso m.barcode.ToLower() = item.barcode.ToLower()).ToList()
+                            If (cekBarcodeSudahDipakai.Count() >= 1) Then
+                                hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Barcode Asset sudah dipakai.", Data)
+                                Exit Try
+                            End If
+                            Application.DoEvents()
+                        Next
+                    End If
 
                     Dim dataOld = DbContext.Assets.FirstOrDefault(Function(m) m.id = Data.id)
                     If (dataOld IsNot Nothing) Then
                         Dim cekKodeSudahDipakai = DbContext.Assets.Where(Function(m) m.id <> Data.id AndAlso m.kd_asset.ToLower() = Data.kd_asset.ToLower()).ToList()
                         If (cekKodeSudahDipakai.Count() = 0) Then
-                            DbContext.Entry(dataOld).CurrentValues.SetValues(Data)
-                            hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(True, "Data telah diubah", Data)
+                            'Ke History
+                            Dim jenisTransaksi = DbContext.JenisTransaksies.FirstOrDefault(Function(m) m.kd_jenis_transaksi.ToLower() = "Perolehan".ToLower())
+                            Dim ruangan = DbContext.Ruangans.FirstOrDefault(Function(m) m.kd_ruangan.ToLower() = "00000-Perolehan".ToLower())
+                            Dim queryHapus = (From x In DbContext.HistoryDetailAssets
+                                              From a In DbContext.DetailAssets.Where(Function(m) m.id = x.id_detail_asset).DefaultIfEmpty()
+                                              From d In DbContext.JenisTransaksies.Where(Function(m) m.id = x.id_jenis_transaksi).DefaultIfEmpty()
+                                              Where a.id_asset = dataOld.id AndAlso d.id = jenisTransaksi.id
+                                              Select x)
+                            DbContext.HistoryDetailAssets.RemoveRange(queryHapus)
+
+                            Dim dataNew As New Data.Entity.Asset With {
+                                .id = Data.id,
+                                .id_kategori = Data.id_kategori,
+                                .kd_asset = Data.kd_asset,
+                                .nama_asset = Data.nama_asset,
+                                .keterangan = Data.keterangan,
+                                .DetailAssets = New List(Of Data.Entity.DetailAsset)}
+                            For Each item In Data.DetailAssets
+                                dataNew.DetailAssets.Add(New DetailAsset With {
+                                                         .id = item.id,
+                                                         .id_asset = Data.id,
+                                                         .barcode = item.barcode,
+                                                         .harga_beli = item.harga_beli,
+                                                         .kondisi = item.kondisi,
+                                                         .sumber = item.sumber,
+                                                         .tgl_perolehan = item.tgl_perolehan})
+                                Application.DoEvents()
+                            Next
+                            DbContext.Entry(dataOld).CurrentValues().SetValues(dataNew)
+
+
+                            'Ke History
+                            Dim queryInsert = (From d In dataNew.DetailAssets
+                                               Select New HistoryDetailAsset With {
+                                                  .id = d.id,
+                                                  .id_detail_asset = d.id,
+                                                  .id_jenis_transaksi = jenisTransaksi.id,
+                                                  .id_ruangan = ruangan.id,
+                                                  .id_transaksi = dataNew.id,
+                                                  .tgl_transaksi = d.tgl_perolehan}).ToList()
+                            DbContext.HistoryDetailAssets.AddRange(queryInsert)
+
+                            DbContext.SaveChanges()
+                            transaction.Commit()
+                            transaction = Nothing
+                            hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(True, "Data telah disimpan", Data)
                         Else
                             hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Kode sudah dipakai di master asset lain.", Nothing)
                         End If
                     Else
-                        hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Data tidak ditemukan", Nothing)
+                        hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Data tidak ditemukan.", Nothing)
                     End If
-                    DbContext.SaveChanges()
                 Catch ex As Exception
+                    If (transaction IsNot Nothing) Then
+                        transaction.Rollback()
+                    End If
+                    transaction = Nothing
                     Log.Error(ex, "Error : " & ex.Message)
                     XtraMessageBox.Show("Info Kesalahan : " & ex.Message, Application.ProductName)
                     hasil = New Tuple(Of Boolean, String, Model.AssetDTo)(False, "Info Kesalahan : " & ex.Message, Nothing)
@@ -263,13 +347,37 @@ Namespace Repository
         Public Function Delete(Data As Model.AssetDTo) As Tuple(Of Boolean, String) Implements IAsset.Delete
             Dim hasil As New Tuple(Of Boolean, String)(False, String.Empty)
             Using dlg As New WaitDialogForm("Sedang menghapus data ...", "Mohon tunggu sebentar")
+                Dim tran As System.Data.Entity.DbContextTransaction = Nothing
                 Try
-                    Dim result = DbContext.Assets.FirstOrDefault(Function(m) m.id = Data.id AndAlso (m.kd_asset.ToLower() <> "0000-perolehan".ToLower() AndAlso m.kd_asset.ToLower() <> "0000-pemutihan".ToLower()))
+                    tran = DbContext.Database.BeginTransaction()
+                    Dim result = DbContext.Assets.FirstOrDefault(Function(m) m.id = Data.id)
                     If (result IsNot Nothing) Then
-                        Dim dipakaiPemakaian = DbContext.Pemakaians.Where(Function(m) m.id_Asset = result.id).ToList()
-                        Dim dipakaiHistory = DbContext.HistoryDetailAssets.Where(Function(m) m.id_Asset = result.id).ToList()
-                        If (dipakaiPemakaian.Count = 0 AndAlso dipakaiHistory.Count = 0) Then
+                        Dim dipakaiPemakaian = (From p In DbContext.Pemakaians
+                                                Join d In DbContext.DetailAssets On p.id_detail_asset Equals d.id
+                                                Where d.id_asset = result.id
+                                                Select p).ToList()
+                        Dim dipakaiPemutihan = (From p In DbContext.Pemutihans
+                                                Join d In DbContext.DetailAssets On p.id_detail_asset Equals d.id
+                                                Where d.id_asset = result.id
+                                                Select p).ToList()
+                        Dim dipakaiHistory = (From p In DbContext.HistoryDetailAssets
+                                              Join d In DbContext.DetailAssets On p.id_detail_asset Equals d.id
+                                              Join j In DbContext.JenisTransaksies On p.id_jenis_transaksi Equals j.id
+                                              Where d.id_asset = result.id AndAlso j.kd_jenis_transaksi.ToLower() <> "00000-Perolehan".ToLower() AndAlso j.kd_jenis_transaksi.ToLower() <> "99999-Pemutihan".ToLower()
+                                              Select p).ToList()
+                        If (dipakaiPemakaian.Count = 0 AndAlso dipakaiPemutihan.Count = 0 AndAlso dipakaiHistory.Count = 0) Then
+                            'Ke History
+                            Dim jenisTransaksi = DbContext.JenisTransaksies.FirstOrDefault(Function(m) m.kd_jenis_transaksi.ToLower() = "Perolehan".ToLower())
+                            Dim ruangan = DbContext.Ruangans.FirstOrDefault(Function(m) m.kd_ruangan.ToLower() = "00000-Perolehan".ToLower())
+                            Dim queryHapus = (From x In DbContext.HistoryDetailAssets
+                                              From a In DbContext.DetailAssets.Where(Function(m) m.id = x.id_detail_asset).DefaultIfEmpty()
+                                              From d In DbContext.JenisTransaksies.Where(Function(m) m.id = x.id_jenis_transaksi).DefaultIfEmpty()
+                                              Where a.id_asset = result.id AndAlso d.id = jenisTransaksi.id
+                                              Select x)
+                            DbContext.HistoryDetailAssets.RemoveRange(queryHapus)
                             DbContext.Assets.Remove(result)
+                            tran.Commit()
+                            tran = Nothing
                             hasil = New Tuple(Of Boolean, String)(True, "Data telah dihapus")
                         Else
                             hasil = New Tuple(Of Boolean, String)(False, "Data telah dipakai di History Detil Asset atau Pemakaian")
@@ -279,6 +387,10 @@ Namespace Repository
                     End If
                     DbContext.SaveChanges()
                 Catch ex As Exception
+                    If (tran IsNot Nothing) Then
+                        tran.Rollback()
+                    End If
+                    tran = Nothing
                     Log.Error(ex, "Error : " & ex.Message)
                     XtraMessageBox.Show("Info Kesalahan : " & ex.Message, Application.ProductName)
                     hasil = New Tuple(Of Boolean, String)(False, "Info Kesalahan : " & ex.Message)

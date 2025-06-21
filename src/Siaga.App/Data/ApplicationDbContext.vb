@@ -26,6 +26,8 @@ Namespace Data
 
         Public Property Pemakaians As DbSet(Of Pemakaian)
 
+        Public Property Pemutihans As DbSet(Of Pemutihan)
+
         Public Property HistoryDetailAssets As DbSet(Of HistoryDetailAsset)
 
         Public Property JenisTransaksies As DbSet(Of JenisTransaksi)
