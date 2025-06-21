@@ -100,7 +100,18 @@ Public Class frmMain
     End Sub
 
     Private Sub mnAssets_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnAssets.ItemClick
-
+        Dim frm As frmDaftarAsset = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is frmDaftarAsset Then
+                frm = TryCast(ctl, frmDaftarAsset)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New frmDaftarAsset() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
     End Sub
 
     Private Sub mnRuangan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnRuangan.ItemClick

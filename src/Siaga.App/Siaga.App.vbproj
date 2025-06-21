@@ -170,6 +170,12 @@
     <Compile Include="Data\Entity\Pemakaian.vb" />
     <Compile Include="Data\Entity\Ruangan.vb" />
     <Compile Include="Data\Entity\Pengguna.vb" />
+    <Compile Include="frmDaftarAsset.Designer.vb">
+      <DependentUpon>frmDaftarAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDaftarAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDaftarRuangan.Designer.vb">
       <DependentUpon>frmDaftarRuangan.vb</DependentUpon>
     </Compile>
@@ -186,6 +192,12 @@
       <DependentUpon>frmDashboard.vb</DependentUpon>
     </Compile>
     <Compile Include="frmDashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntriAsset.Designer.vb">
+      <DependentUpon>frmEntriAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntriAsset.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEntriRuangan.Designer.vb">
@@ -271,6 +283,9 @@
     <Compile Include="Services\IPengguna.vb" />
     <Compile Include="Utils\Program.vb" />
     <Compile Include="Utils\Utils.vb" />
+    <EmbeddedResource Include="frmDaftarAsset.resx">
+      <DependentUpon>frmDaftarAsset.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDaftarRuangan.resx">
       <DependentUpon>frmDaftarRuangan.vb</DependentUpon>
     </EmbeddedResource>
@@ -279,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDashboard.resx">
       <DependentUpon>frmDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntriAsset.resx">
+      <DependentUpon>frmEntriAsset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntriRuangan.resx">
       <DependentUpon>frmEntriRuangan.vb</DependentUpon>
@@ -333,6 +351,7 @@
     <None Include="app.config" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.KategoriAsset.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.Ruangan.datasource" />
+    <None Include="My Project\DataSources\Siaga.App.Model.AssetDTo.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>

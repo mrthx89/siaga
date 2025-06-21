@@ -22,6 +22,14 @@ Namespace Model
     End Class
 
     Public Class DetilAssetDTo
+        Public Sub New()
+            Me.id = Guid.NewGuid()
+            Me.kondisi = String.Empty
+            Me.sumber = String.Empty
+            Me.tgl_perolehan = DateTime.Now
+            Me.harga_beli = 0
+            Me.barcode = Me.id.ToString()
+        End Sub
         Public Property id As Guid
 
         Public Property id_asset As Guid
