@@ -104,7 +104,7 @@ Public Class frmEntriAsset
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
         If Me.Validate() Then
             Dim dataValid = Model.DetailAssets.Where(Function(m)
-                                                         Return m.tgl_perolehan >= DateTime.Parse("1900-01-01") OrElse String.IsNullOrEmpty(m.sumber) OrElse String.IsNullOrWhiteSpace(m.sumber) OrElse String.IsNullOrEmpty(m.kondisi) OrElse String.IsNullOrWhiteSpace(m.kondisi)
+                                                         Return m.tgl_perolehan <= DateTime.Parse("1900-01-01") OrElse String.IsNullOrEmpty(m.sumber) OrElse String.IsNullOrWhiteSpace(m.sumber) OrElse String.IsNullOrEmpty(m.kondisi) OrElse String.IsNullOrWhiteSpace(m.kondisi)
                                                      End Function)
             If (dataValid.Count = 0) Then
                 GridView1.AddNewRow()

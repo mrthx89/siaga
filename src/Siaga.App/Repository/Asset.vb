@@ -23,8 +23,7 @@ Namespace Repository
                                      .kd_asset = a.kd_asset,
                                      .keterangan = a.keterangan,
                                      .nama_asset = a.nama_asset,
-                                     .nama_kategori = If(k Is Nothing, k.nama_kategori, String.Empty),
-                                     .DetailAssets = New List(Of Model.DetilAssetDTo)()}).ToList()
+                                     .nama_kategori = If(k IsNot Nothing, k.nama_kategori, String.Empty)}).ToList()
                     For Each item In result
                         item.DetailAssets = (From d In DbContext.DetailAssets
                                              Where d.id_asset = item.id
@@ -61,8 +60,7 @@ Namespace Repository
                                      .kd_asset = a.kd_asset,
                                      .keterangan = a.keterangan,
                                      .nama_asset = a.nama_asset,
-                                     .nama_kategori = If(k Is Nothing, k.nama_kategori, String.Empty),
-                                     .DetailAssets = New List(Of Model.DetilAssetDTo)()}).FirstOrDefault()
+                                     .nama_kategori = If(k IsNot Nothing, k.nama_kategori, String.Empty)}).FirstOrDefault()
                     If (result IsNot Nothing) Then
                         result.DetailAssets = (From d In DbContext.DetailAssets
                                                Where d.id_asset = result.id
@@ -102,8 +100,7 @@ Namespace Repository
                                      .kd_asset = a.kd_asset,
                                      .keterangan = a.keterangan,
                                      .nama_asset = a.nama_asset,
-                                     .nama_kategori = If(k Is Nothing, k.nama_kategori, String.Empty),
-                                     .DetailAssets = New List(Of Model.DetilAssetDTo)()}).FirstOrDefault()
+                                     .nama_kategori = If(k IsNot Nothing, k.nama_kategori, String.Empty)}).FirstOrDefault()
                     If (result IsNot Nothing) Then
                         result.DetailAssets = (From d In DbContext.DetailAssets
                                                Where d.id_asset = result.id
@@ -289,35 +286,48 @@ Namespace Repository
                                               Select x)
                             DbContext.HistoryDetailAssets.RemoveRange(queryHapus)
 
-                            Dim dataNew As New Data.Entity.Asset With {
-                                .id = Data.id,
-                                .id_kategori = Data.id_kategori,
-                                .kd_asset = Data.kd_asset,
-                                .nama_asset = Data.nama_asset,
-                                .keterangan = Data.keterangan,
-                                .DetailAssets = New List(Of Data.Entity.DetailAsset)}
-                            For Each item In Data.DetailAssets
-                                dataNew.DetailAssets.Add(New DetailAsset With {
-                                                         .id = item.id,
-                                                         .id_asset = Data.id,
-                                                         .barcode = item.barcode,
-                                                         .harga_beli = item.harga_beli,
-                                                         .kondisi = item.kondisi,
-                                                         .sumber = item.sumber,
-                                                         .tgl_perolehan = item.tgl_perolehan})
+                            'Proses Update
+                            dataOld.id_kategori = Data.id_kategori
+                            dataOld.kd_asset = Data.kd_asset
+                            dataOld.nama_asset = Data.nama_asset
+                            dataOld.keterangan = Data.keterangan
+
+                            For Each itemBaru In Data.DetailAssets
+                                Dim itemLama = dataOld.DetailAssets.FirstOrDefault(Function(x) x.id = itemBaru.id)
+                                If itemLama IsNot Nothing Then
+                                    ' Update
+                                    itemLama.barcode = itemBaru.barcode
+                                    itemLama.harga_beli = itemBaru.harga_beli
+                                    itemLama.kondisi = itemBaru.kondisi
+                                    itemLama.sumber = itemBaru.sumber
+                                    itemLama.tgl_perolehan = itemBaru.tgl_perolehan
+                                Else
+                                    ' Insert baru
+                                    DbContext.DetailAssets.Add(New DetailAsset With {
+                                        .id = itemBaru.id,
+                                        .id_asset = Data.id,
+                                        .barcode = itemBaru.barcode,
+                                        .harga_beli = itemBaru.harga_beli,
+                                        .kondisi = itemBaru.kondisi,
+                                        .sumber = itemBaru.sumber,
+                                        .tgl_perolehan = itemBaru.tgl_perolehan
+                                    })
+                                End If
+
                                 Application.DoEvents()
                             Next
-                            DbContext.Entry(dataOld).CurrentValues().SetValues(dataNew)
-
+                            Dim toBeDeleted = dataOld.DetailAssets.Where(Function(itemLama) Not Data.DetailAssets.Any(Function(x) x.id = itemLama.id)).ToList()
+                            DbContext.DetailAssets.RemoveRange(toBeDeleted)
+                            DbContext.Entry(dataOld).State = System.Data.Entity.EntityState.Modified
 
                             'Ke History
-                            Dim queryInsert = (From d In dataNew.DetailAssets
+                            Dim queryInsert = (From d In dataOld.DetailAssets
                                                Select New HistoryDetailAsset With {
                                                   .id = d.id,
                                                   .id_detail_asset = d.id,
                                                   .id_jenis_transaksi = jenisTransaksi.id,
                                                   .id_ruangan = ruangan.id,
-                                                  .id_transaksi = dataNew.id,
+                                                  .id_transaksi = dataOld.id,
                                                   .tgl_transaksi = d.tgl_perolehan}).ToList()
                             DbContext.HistoryDetailAssets.AddRange(queryInsert)
 

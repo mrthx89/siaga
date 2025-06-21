@@ -15,7 +15,7 @@ Namespace Repository
             Dim hasil As New Tuple(Of Boolean, String, List(Of Entity.Ruangan))(False, String.Empty, Nothing)
             Using dlg As New WaitDialogForm("Sedang merefresh data ...", "Mohon tunggu sebentar")
                 Try
-                    Dim result = DbContext.Ruangans.AsNoTracking.Where(Function(m) All OrElse (m.kd_ruangan.ToLower() <> "0000-perolehan".ToLower() AndAlso m.kd_ruangan.ToLower() <> "0000-pemutihan".ToLower())).ToList()
+                    Dim result = DbContext.Ruangans.AsNoTracking.Where(Function(m) All OrElse (m.kd_ruangan.ToLower() <> "00000-perolehan".ToLower() AndAlso m.kd_ruangan.ToLower() <> "99999-pemutihan".ToLower())).ToList()
                     hasil = New Tuple(Of Boolean, String, List(Of Entity.Ruangan))(True, "Data ditemukan", result)
                 Catch ex As Exception
                     Log.Error(ex, "Error : " & ex.Message)
