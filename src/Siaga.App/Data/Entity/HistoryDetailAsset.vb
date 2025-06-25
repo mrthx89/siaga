@@ -5,6 +5,8 @@ Namespace Data.Entity
     <Table("historydetailasset")>
     Public Class HistoryDetailAsset
         <Key>
+        <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+        Public Property noid As Long
         Public Property id As Guid
         Public Property id_ruangan As Guid
         Public Property id_detail_asset As Guid

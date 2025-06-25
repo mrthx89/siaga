@@ -160,6 +160,17 @@ Public Class frmMain
     End Sub
 
     Private Sub mnPemutihan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnPemutihan.ItemClick
-
+        Dim frm As frmDaftarPemutihan = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is frmDaftarPemutihan Then
+                frm = TryCast(ctl, frmDaftarPemutihan)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New frmDaftarPemutihan() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
     End Sub
 End Class

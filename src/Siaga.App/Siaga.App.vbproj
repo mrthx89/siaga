@@ -191,6 +191,12 @@
     <Compile Include="frmDaftarAsset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDaftarPemutihan.Designer.vb">
+      <DependentUpon>frmDaftarPemutihan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDaftarPemutihan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDaftarPemakaian.Designer.vb">
       <DependentUpon>frmDaftarPemakaian.vb</DependentUpon>
     </Compile>
@@ -219,6 +225,12 @@
       <DependentUpon>frmEntriAsset.vb</DependentUpon>
     </Compile>
     <Compile Include="frmEntriAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntriPemutihan.Designer.vb">
+      <DependentUpon>frmEntriPemutihan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntriPemutihan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEntriPemakaian.Designer.vb">
@@ -291,6 +303,10 @@
       <DependentUpon>202506211456531_Pemutihan.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202506211456531_Pemutihan.vb" />
+    <Compile Include="Migrations\202506250740030_HistoryKeAutoIncreament.designer.vb">
+      <DependentUpon>202506250740030_HistoryKeAutoIncreament.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506250740030_HistoryKeAutoIncreament.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\AppConfig.vb" />
     <Compile Include="Model\AssetDTo.vb" />
@@ -322,6 +338,9 @@
     <EmbeddedResource Include="frmDaftarAsset.resx">
       <DependentUpon>frmDaftarAsset.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDaftarPemutihan.resx">
+      <DependentUpon>frmDaftarPemutihan.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDaftarPemakaian.resx">
       <DependentUpon>frmDaftarPemakaian.vb</DependentUpon>
     </EmbeddedResource>
@@ -336,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntriAsset.resx">
       <DependentUpon>frmEntriAsset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntriPemutihan.resx">
+      <DependentUpon>frmEntriPemutihan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntriPemakaian.resx">
       <DependentUpon>frmEntriPemakaian.vb</DependentUpon>
@@ -379,6 +401,9 @@
     <EmbeddedResource Include="Migrations\202506211456531_Pemutihan.resx">
       <DependentUpon>202506211456531_Pemutihan.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506250740030_HistoryKeAutoIncreament.resx">
+      <DependentUpon>202506250740030_HistoryKeAutoIncreament.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -393,9 +418,11 @@
     <None Include="app.config" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.KategoriAsset.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.Pemakaian.datasource" />
+    <None Include="My Project\DataSources\Siaga.App.Data.Entity.Pemutihan.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.Ruangan.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Model.AssetDTo.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Model.PemakaianDTo.datasource" />
+    <None Include="My Project\DataSources\Siaga.App.Model.PemutihanDTo.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>

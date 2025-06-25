@@ -7,17 +7,17 @@ Namespace Migrations
         Inherits DbMigration
     
         Public Overrides Sub Up()
-            AddColumn("dbo.detailasset", "barcode", Function(c) c.String(maxLength := 50, storeType := "nvarchar"))
-            CreateIndex("dbo.detailasset", "barcode", unique := True, name := "ix_detail_asset_barcode")
-            DropColumn("dbo.detailasset", "kd_detail")
-            DropColumn("dbo.detailasset", "nama_asset")
+            AddColumn("detailasset", "barcode", Function(c) c.String(maxLength:=50, storeType:="nvarchar"))
+            CreateIndex("detailasset", "barcode", unique:=True, name:="ix_detail_asset_barcode")
+            DropColumn("detailasset", "kd_detail")
+            DropColumn("detailasset", "nama_asset")
         End Sub
-        
+
         Public Overrides Sub Down()
-            AddColumn("dbo.detailasset", "nama_asset", Function(c) c.String(maxLength := 100, storeType := "nvarchar"))
-            AddColumn("dbo.detailasset", "kd_detail", Function(c) c.String(maxLength := 50, storeType := "nvarchar"))
-            DropIndex("dbo.detailasset", "ix_detail_asset_barcode")
-            DropColumn("dbo.detailasset", "barcode")
+            AddColumn("detailasset", "nama_asset", Function(c) c.String(maxLength:=100, storeType:="nvarchar"))
+            AddColumn("detailasset", "kd_detail", Function(c) c.String(maxLength:=50, storeType:="nvarchar"))
+            DropIndex("detailasset", "ix_detail_asset_barcode")
+            DropColumn("detailasset", "barcode")
         End Sub
     End Class
 End Namespace

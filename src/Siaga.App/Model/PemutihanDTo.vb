@@ -3,7 +3,6 @@
 Namespace Model
     Public Class PemutihanDTo
         Public Property id As Guid
-        Public Property id_ruangan As Guid
         Public Property id_detail_asset As Guid
         Public Property detail_asset As String
         Public Property tgl_pemutihan As DateTime

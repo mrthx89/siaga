@@ -2,15 +2,14 @@
 Imports DevExpress.Utils
 Imports DevExpress.XtraGrid.Views.Grid
 
-Public Class frmEntriPemakaian
-    Public Property Model As Data.Entity.Pemakaian
+Public Class frmEntriPemutihan
+    Public Property Model As Data.Entity.Pemutihan
     Public Property PTipe As [Enum].PTipe
 
-    Private ReadOnly Rep As Services.IPemakaian = New Repository.Pemakaian()
-    Private ReadOnly RepRuangan As Services.IRuangan = New Repository.Ruangan()
+    Private ReadOnly Rep As Services.IPemutihan = New Repository.Pemutihan()
     Private ReadOnly RepAsset As Services.IAsset = New Repository.Asset()
 
-    Public Sub New(PTipe As [Enum].PTipe, Model As Data.Entity.Pemakaian)
+    Public Sub New(PTipe As [Enum].PTipe, Model As Data.Entity.Pemutihan)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -25,29 +24,24 @@ Public Class frmEntriPemakaian
         Me.Close()
     End Sub
 
-    Private Sub frmEntriPemakaian_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim hasilRuangan = RepRuangan.GetAll(False)
-        Dim listRuangan = From x In If(hasilRuangan.Item1, hasilRuangan.Item3, New List(Of Data.Entity.Ruangan))
-                          Select New With {.ID = x.id, .Kode = x.kd_ruangan, .Nama = x.nama_ruangan}
-        id_ruanganSearchLookUpEdit.Properties.DataSource = listRuangan.ToList()
-        id_ruanganSearchLookUpEdit.Properties.ValueMember = "ID"
-        id_ruanganSearchLookUpEdit.Properties.DisplayMember = "Nama"
-
+    Private Sub frmEntriPemutihan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If (PTipe = [Enum].PTipe.Create) Then
-            Model = New Data.Entity.Pemakaian With {
+            Model = New Data.Entity.Pemutihan With {
                 .id = Guid.NewGuid,
-                .id_ruangan = Guid.Empty,
                 .id_detail_asset = Guid.Empty,
-                .tgl_mulai_pakai = DateTime.Now.Date}
+                .tgl_pemutihan = DateTime.Now.Date,
+                .alasan = String.Empty,
+                .keterangan = String.Empty}
         Else
             'Get Data
             Dim Result = Rep.Get(Model.id)
             If (Result.Item1) Then
-                Model = New Data.Entity.Pemakaian With {
+                Model = New Data.Entity.Pemutihan With {
                     .id = Result.Item3.id,
                     .id_detail_asset = Result.Item3.id_detail_asset,
-                    .id_ruangan = Result.Item3.id_ruangan,
-                    .tgl_mulai_pakai = Result.Item3.tgl_mulai_pakai}
+                    .tgl_pemutihan = Result.Item3.tgl_pemutihan,
+                    .alasan = Result.Item3.alasan,
+                    .keterangan = Result.Item3.keterangan}
             Else
                 XtraMessageBox.Show(Result.Item2, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 DialogResult = DialogResult.Abort
@@ -56,7 +50,7 @@ Public Class frmEntriPemakaian
         End If
 
         'Show Data
-        PemakaianBindingSource.DataSource = Model
+        PemutihanBindingSource.DataSource = Model
 
         'DataSource Perlu Data Awal
         Dim hasilAsset = RepAsset.LookUp(Model.id_detail_asset)
@@ -75,12 +69,11 @@ Public Class frmEntriPemakaian
         mnSimpanLayouts.Enabled = False
         DataLayoutControl1.SaveLayoutToXml(IO.Path.Combine(Program.FolderApp, "System", "Layouts", $"{Me.Name}_{DataLayoutControl1.Name}.xml"))
         gvDetailAsset.SaveLayoutToXml(IO.Path.Combine(Program.FolderApp, "System", "Layouts", $"{Me.Name}_{gvDetailAsset.Name}.xml"))
-        gvRuangan.SaveLayoutToXml(IO.Path.Combine(Program.FolderApp, "System", "Layouts", $"{Me.Name}_{gvRuangan.Name}.xml"))
         XtraMessageBox.Show("Berhasil disimpan.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         mnSimpanLayouts.Enabled = True
     End Sub
 
-    Private Sub GridView1_DataSourceChange(sender As Object, e As EventArgs) Handles gvDetailAsset.DataSourceChanged, gvRuangan.DataSourceChanged
+    Private Sub GridView1_DataSourceChange(sender As Object, e As EventArgs) Handles gvDetailAsset.DataSourceChanged
         If (IO.File.Exists(IO.Path.Combine(Program.FolderApp, "System", "Layouts", $"{Me.Name}_{TryCast(sender, GridView).Name}.xml"))) Then
             TryCast(sender, GridView).RestoreLayoutFromXml(IO.Path.Combine(Program.FolderApp, "System", "Layouts", $"{Me.Name}_{TryCast(sender, GridView).Name}.xml"))
         End If
@@ -93,14 +86,14 @@ Public Class frmEntriPemakaian
     Private Sub mnSimpan_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnSimpan.ItemClick
         mnSimpan.Enabled = False
         If (Me.Validate) Then
-            Dim Result As Tuple(Of Boolean, String, Data.Entity.Pemakaian)
+            Dim Result As Tuple(Of Boolean, String, Data.Entity.Pemutihan)
 
             If (PTipe = [Enum].PTipe.Create) Then
                 Result = Rep.Create(Model)
             ElseIf (PTipe = [Enum].PTipe.Edit) Then
                 Result = Rep.Update(Model)
             Else
-                Result = New Tuple(Of Boolean, String, Data.Entity.Pemakaian)(False, "Tidak ada action", Nothing)
+                Result = New Tuple(Of Boolean, String, Data.Entity.Pemutihan)(False, "Tidak ada action", Nothing)
             End If
             If (Result.Item1) Then
                 DialogResult = DialogResult.OK

@@ -204,7 +204,7 @@ Namespace Repository
 
                         Dim queryInsert = (From d In dataNew.DetailAssets
                                            Select New HistoryDetailAsset With {
-                                              .id = d.id,
+                                              .id = Guid.NewGuid,
                                               .id_detail_asset = d.id,
                                               .id_jenis_transaksi = jenisTransaksi.id,
                                               .id_ruangan = ruangan.id,
@@ -324,7 +324,7 @@ Namespace Repository
                             'Ke History
                             Dim queryInsert = (From d In dataOld.DetailAssets
                                                Select New HistoryDetailAsset With {
-                                                  .id = d.id,
+                                                  .id = Guid.NewGuid,
                                                   .id_detail_asset = d.id,
                                                   .id_jenis_transaksi = jenisTransaksi.id,
                                                   .id_ruangan = ruangan.id,
