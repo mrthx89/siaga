@@ -15,25 +15,45 @@ Namespace Repository
             Dim hasil As New Tuple(Of Boolean, String, List(Of Model.PemakaianDTo))(False, String.Empty, Nothing)
             Using dlg As New WaitDialogForm("Sedang merefresh data ...", "Mohon tunggu sebentar")
                 Try
-                    Dim result = (From p In DbContext.Pemakaians
-                                  From r In DbContext.Ruangans.Where(Function(m) m.id = p.id_ruangan).DefaultIfEmpty()
-                                  From d In DbContext.DetailAssets.Where(Function(m) m.id = p.id_detail_asset).DefaultIfEmpty()
-                                  From a In DbContext.Assets.Where(Function(m) m.id = If(d IsNot Nothing, d.id_asset, Guid.Empty)).DefaultIfEmpty()
-                                  From k In DbContext.KategoriAssets.Where(Function(m) m.id = If(a IsNot Nothing, a.id_kategori, Guid.Empty)).DefaultIfEmpty()
-                                  Where p.tgl_mulai_pakai.Date >= Filter.TglDari.Date AndAlso p.tgl_mulai_pakai.Date <= Filter.TglSampai.Date AndAlso
-                                     (Filter.IDAsset = Guid.Empty OrElse d.id_asset = Filter.IDAsset) AndAlso
-                                     (Filter.IDKategoriAsset = Guid.Empty OrElse a.id_kategori = Filter.IDKategoriAsset) AndAlso
-                                     (Filter.IDRuangan = Guid.Empty OrElse p.id_ruangan = Filter.IDRuangan)
-                                  Select New Model.PemakaianDTo With {
-                                     .id = a.id,
+                    Dim TglDari As DateTime = Filter.TglDari.Date
+                    Dim TglSampai As DateTime = Filter.TglSampai.Date.AddDays(1)
+                    Dim query = (From p In DbContext.Pemakaians
+                                 From r In DbContext.Ruangans.Where(Function(m) m.id = p.id_ruangan).DefaultIfEmpty()
+                                 From d In DbContext.DetailAssets.Where(Function(m) m.id = p.id_detail_asset).DefaultIfEmpty()
+                                 From a In DbContext.Assets.Where(Function(m) m.id = If(d IsNot Nothing, d.id_asset, Guid.Empty)).DefaultIfEmpty()
+                                 From k In DbContext.KategoriAssets.Where(Function(m) m.id = If(a IsNot Nothing, a.id_kategori, Guid.Empty)).DefaultIfEmpty()
+                                 Where p.tgl_mulai_pakai >= TglDari AndAlso p.tgl_mulai_pakai < TglSampai
+                                 Select New With {
+                                     a.id,
                                      .asset = If(a IsNot Nothing, a.nama_asset, String.Empty),
                                      .detail_asset = If(d IsNot Nothing, d.barcode, String.Empty),
-                                     .id_detail_asset = p.id_detail_asset,
+                                     p.id_detail_asset,
                                      .id_asset = If(d IsNot Nothing, d.id_asset, Guid.Empty),
-                                     .id_ruangan = p.id_ruangan,
+                                     p.id_ruangan,
                                      .kategori_asset = If(k IsNot Nothing, k.nama_kategori, String.Empty),
                                      .ruangan = If(r IsNot Nothing, r.nama_ruangan, String.Empty),
-                                     .tgl_mulai_pakai = p.tgl_mulai_pakai}).ToList()
+                                     p.tgl_mulai_pakai,
+                                     .id_kategori = If(a IsNot Nothing, a.id_kategori, Guid.Empty)})
+                    If (Filter.IDAsset <> Guid.Empty) Then
+                        query.Where(Function(m) m.id_asset = Filter.IDAsset)
+                    End If
+                    If (Filter.IDKategoriAsset <> Guid.Empty) Then
+                        query.Where(Function(m) m.id_kategori = Filter.IDKategoriAsset)
+                    End If
+                    If (Filter.IDRuangan <> Guid.Empty) Then
+                        query.Where(Function(m) m.id_ruangan = Filter.IDRuangan)
+                    End If
+                    Dim result = (From x In query
+                                  Select New Model.PemakaianDTo With {
+                                      .id = x.id,
+                                      .asset = x.asset,
+                                      .detail_asset = x.detail_asset,
+                                      .id_asset = x.id_asset,
+                                      .id_detail_asset = x.id_detail_asset,
+                                      .id_ruangan = x.id_ruangan,
+                                      .kategori_asset = x.kategori_asset,
+                                      .ruangan = x.ruangan,
+                                      .tgl_mulai_pakai = x.tgl_mulai_pakai}).ToList()
                     hasil = New Tuple(Of Boolean, String, List(Of Model.PemakaianDTo))(True, "Data ditemukan", result)
                 Catch ex As Exception
                     Log.Error(ex, "Error : " & ex.Message)

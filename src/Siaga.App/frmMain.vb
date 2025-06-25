@@ -145,7 +145,18 @@ Public Class frmMain
     End Sub
 
     Private Sub mnPemindahan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnPemakaian.ItemClick
-
+        Dim frm As frmDaftarPemakaian = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is frmDaftarPemakaian Then
+                frm = TryCast(ctl, frmDaftarPemakaian)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New frmDaftarPemakaian() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
     End Sub
 
     Private Sub mnPemutihan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnPemutihan.ItemClick

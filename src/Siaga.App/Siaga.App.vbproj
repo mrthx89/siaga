@@ -191,6 +191,12 @@
     <Compile Include="frmDaftarAsset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDaftarPemakaian.Designer.vb">
+      <DependentUpon>frmDaftarPemakaian.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDaftarPemakaian.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDaftarRuangan.Designer.vb">
       <DependentUpon>frmDaftarRuangan.vb</DependentUpon>
     </Compile>
@@ -309,6 +315,9 @@
     <EmbeddedResource Include="frmDaftarAsset.resx">
       <DependentUpon>frmDaftarAsset.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDaftarPemakaian.resx">
+      <DependentUpon>frmDaftarPemakaian.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDaftarRuangan.resx">
       <DependentUpon>frmDaftarRuangan.vb</DependentUpon>
     </EmbeddedResource>
@@ -375,6 +384,7 @@
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.KategoriAsset.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.Ruangan.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Model.AssetDTo.datasource" />
+    <None Include="My Project\DataSources\Siaga.App.Model.PemakaianDTo.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
