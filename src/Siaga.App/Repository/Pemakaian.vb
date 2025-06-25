@@ -24,7 +24,7 @@ Namespace Repository
                                  From k In DbContext.KategoriAssets.Where(Function(m) m.id = If(a IsNot Nothing, a.id_kategori, Guid.Empty)).DefaultIfEmpty()
                                  Where p.tgl_mulai_pakai >= TglDari AndAlso p.tgl_mulai_pakai < TglSampai
                                  Select New With {
-                                     a.id,
+                                     p.id,
                                      .asset = If(a IsNot Nothing, a.nama_asset, String.Empty),
                                      .detail_asset = If(d IsNot Nothing, d.barcode, String.Empty),
                                      p.id_detail_asset,
@@ -75,7 +75,7 @@ Namespace Repository
                                   From k In DbContext.KategoriAssets.Where(Function(m) m.id = If(a IsNot Nothing, a.id_kategori, Guid.Empty)).DefaultIfEmpty()
                                   Where p.id = Id
                                   Select New Model.PemakaianDTo With {
-                                     .id = a.id,
+                                     .id = p.id,
                                      .asset = If(a IsNot Nothing, a.nama_asset, String.Empty),
                                      .detail_asset = If(d IsNot Nothing, d.barcode, String.Empty),
                                      .id_detail_asset = p.id_detail_asset,

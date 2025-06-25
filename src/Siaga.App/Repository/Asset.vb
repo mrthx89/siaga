@@ -4,6 +4,7 @@ Imports Siaga.App.Data
 Imports DevExpress.XtraEditors
 Imports DevExpress.Utils
 Imports Serilog
+Imports Siaga.App.Model
 
 Namespace Repository
     Public Class Asset
@@ -404,6 +405,31 @@ Namespace Repository
                     Log.Error(ex, "Error : " & ex.Message)
                     XtraMessageBox.Show("Info Kesalahan : " & ex.Message, Application.ProductName)
                     hasil = New Tuple(Of Boolean, String)(False, "Info Kesalahan : " & ex.Message)
+                End Try
+            End Using
+            Return hasil
+        End Function
+
+        Public Function LookUp(id As Guid) As Tuple(Of Boolean, String, List(Of DetilAssetLookUpDTo)) Implements IAsset.LookUp
+            Dim hasil As New Tuple(Of Boolean, String, List(Of DetilAssetLookUpDTo))(False, String.Empty, Nothing)
+            Using dlg As New WaitDialogForm("Sedang merefresh data ...", "Mohon tunggu sebentar")
+                Try
+                    Dim query = (From d In DbContext.DetailAssets
+                                 Join a In DbContext.Assets On a.id Equals d.id_asset
+                                 Join k In DbContext.KategoriAssets On k.id Equals a.id_kategori
+                                 From p In DbContext.Pemutihans.Where(Function(m) m.id_detail_asset = d.id).DefaultIfEmpty()
+                                 Where (d.id = id OrElse p Is Nothing)
+                                 Select New Model.DetilAssetLookUpDTo With {
+                                    .ID = d.id,
+                                    .Barcode = d.barcode,
+                                    .KategoriAsset = k.nama_kategori,
+                                    .KodeAsset = a.kd_asset,
+                                    .NamaAsset = a.nama_asset})
+                    hasil = New Tuple(Of Boolean, String, List(Of Model.DetilAssetLookUpDTo))(True, "Data ditemukan", query.ToList())
+                Catch ex As Exception
+                    Log.Error(ex, "Error : " & ex.Message)
+                    XtraMessageBox.Show("Info Kesalahan : " & ex.Message, Application.ProductName)
+                    hasil = New Tuple(Of Boolean, String, List(Of Model.DetilAssetLookUpDTo))(False, "Info Kesalahan : " & ex.Message, Nothing)
                 End Try
             End Using
             Return hasil

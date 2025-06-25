@@ -221,6 +221,12 @@
     <Compile Include="frmEntriAsset.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmEntriPemakaian.Designer.vb">
+      <DependentUpon>frmEntriPemakaian.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntriPemakaian.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmEntriRuangan.Designer.vb">
       <DependentUpon>frmEntriRuangan.vb</DependentUpon>
     </Compile>
@@ -288,6 +294,7 @@
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\AppConfig.vb" />
     <Compile Include="Model\AssetDTo.vb" />
+    <Compile Include="Model\DetilAssetLookUpDTo.vb" />
     <Compile Include="Model\Enum.vb" />
     <Compile Include="Model\FilterListPemutihan.vb" />
     <Compile Include="Model\FilterListPemakaian.vb" />
@@ -329,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntriAsset.resx">
       <DependentUpon>frmEntriAsset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntriPemakaian.resx">
+      <DependentUpon>frmEntriPemakaian.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntriRuangan.resx">
       <DependentUpon>frmEntriRuangan.vb</DependentUpon>
@@ -382,6 +392,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.KategoriAsset.datasource" />
+    <None Include="My Project\DataSources\Siaga.App.Data.Entity.Pemakaian.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Data.Entity.Ruangan.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Model.AssetDTo.datasource" />
     <None Include="My Project\DataSources\Siaga.App.Model.PemakaianDTo.datasource" />

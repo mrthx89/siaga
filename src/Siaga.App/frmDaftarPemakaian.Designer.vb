@@ -421,7 +421,7 @@ Partial Class frmDaftarPemakaian
         Me.Controls.Add(Me.barDockControlTop)
         Me.Name = "frmDaftarPemakaian"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Daftar Pemakaian"
+        Me.Text = "Daftar Pemakaian Asset"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PemakaianBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

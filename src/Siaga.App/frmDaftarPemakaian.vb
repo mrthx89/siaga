@@ -36,49 +36,50 @@ Public Class frmDaftarPemakaian
     End Sub
 
     Private Sub mnBaru_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnBaru.ItemClick
-        'mnBaru.Enabled = False
-        'Using frm As New frmEntriPemakaian([Enum].PTipe.Create, New Model.PemakaianDTo())
-        '    Try
-        '        If (frm.ShowDialog(Me) = DialogResult.OK) Then
-        '            mnSegarkan.PerformClick()
+        mnBaru.Enabled = False
+        Using frm As New frmEntriPemakaian([Enum].PTipe.Create, New Data.Entity.Pemakaian())
+            Try
+                If (frm.ShowDialog(Me) = DialogResult.OK) Then
+                    mnSegarkan.PerformClick()
 
-        '            With GridView1
-        '                .ClearSelection()
-        '                .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
-        '                .SelectRow(.FocusedRowHandle)
-        '                .MakeRowVisible(.FocusedRowHandle)
-        '            End With
-        '        End If
-        '    Catch ex As Exception
-        '        Log.Error(ex, "Error : " & ex.Message)
-        '        XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    End Try
-        'End Using
-        'mnBaru.Enabled = True
+                    With GridView1
+                        .ClearSelection()
+                        .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
+                        .SelectRow(.FocusedRowHandle)
+                        .MakeRowVisible(.FocusedRowHandle)
+                    End With
+                End If
+            Catch ex As Exception
+                Log.Error(ex, "Error : " & ex.Message)
+                XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Using
+        mnBaru.Enabled = True
     End Sub
 
     Private Sub mnUbah_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnUbah.ItemClick
-        'mnUbah.Enabled = False
-        'If (GridView1.FocusedRowHandle >= 0) Then
-        '    Using frm As New frmEntriPemakaian([Enum].PTipe.Edit, TryCast(PemakaianBindingSource.Current, Model.PemakaianDTo))
-        '        Try
-        '            If (frm.ShowDialog(Me) = DialogResult.OK) Then
-        '                mnSegarkan.PerformClick()
+        mnUbah.Enabled = False
+        If (GridView1.FocusedRowHandle >= 0) Then
+            Dim viewModel = TryCast(PemakaianBindingSource.Current, Model.PemakaianDTo)
+            Using frm As New frmEntriPemakaian([Enum].PTipe.Edit, New Data.Entity.Pemakaian With {.id = viewModel.id, .id_detail_asset = viewModel.id_detail_asset, .id_ruangan = viewModel.id_ruangan, .tgl_mulai_pakai = viewModel.tgl_mulai_pakai})
+                Try
+                    If (frm.ShowDialog(Me) = DialogResult.OK) Then
+                        mnSegarkan.PerformClick()
 
-        '                With GridView1
-        '                    .ClearSelection()
-        '                    .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
-        '                    .SelectRow(.FocusedRowHandle)
-        '                    .MakeRowVisible(.FocusedRowHandle)
-        '                End With
-        '            End If
-        '        Catch ex As Exception
-        '            Log.Error(ex, "Error : " & ex.Message)
-        '            XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '        End Try
-        '    End Using
-        'End If
-        'mnUbah.Enabled = True
+                        With GridView1
+                            .ClearSelection()
+                            .FocusedRowHandle = .LocateByDisplayText(0, colid, frm.Model.id.ToString())
+                            .SelectRow(.FocusedRowHandle)
+                            .MakeRowVisible(.FocusedRowHandle)
+                        End With
+                    End If
+                Catch ex As Exception
+                    Log.Error(ex, "Error : " & ex.Message)
+                    XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End If
+        mnUbah.Enabled = True
     End Sub
 
     Private Sub mnHapus_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles mnHapus.ItemClick
