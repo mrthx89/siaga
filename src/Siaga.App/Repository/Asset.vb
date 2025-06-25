@@ -373,7 +373,7 @@ Namespace Repository
                         Dim dipakaiHistory = (From p In DbContext.HistoryDetailAssets
                                               Join d In DbContext.DetailAssets On p.id_detail_asset Equals d.id
                                               Join j In DbContext.JenisTransaksies On p.id_jenis_transaksi Equals j.id
-                                              Where d.id_asset = result.id AndAlso j.kd_jenis_transaksi.ToLower() <> "00000-Perolehan".ToLower() AndAlso j.kd_jenis_transaksi.ToLower() <> "99999-Pemutihan".ToLower()
+                                              Where d.id_asset = result.id AndAlso j.kd_jenis_transaksi.ToLower() <> "00000-Perolehan".ToLower()
                                               Select p).ToList()
                         If (dipakaiPemakaian.Count = 0 AndAlso dipakaiPemutihan.Count = 0 AndAlso dipakaiHistory.Count = 0) Then
                             'Ke History
@@ -386,6 +386,7 @@ Namespace Repository
                                               Select x)
                             DbContext.HistoryDetailAssets.RemoveRange(queryHapus)
                             DbContext.Assets.Remove(result)
+                            DbContext.SaveChanges()
                             tran.Commit()
                             tran = Nothing
                             hasil = New Tuple(Of Boolean, String)(True, "Data telah dihapus")
@@ -395,7 +396,6 @@ Namespace Repository
                     Else
                         hasil = New Tuple(Of Boolean, String)(False, "Data tidak ditemukan")
                     End If
-                    DbContext.SaveChanges()
                 Catch ex As Exception
                     If (tran IsNot Nothing) Then
                         tran.Rollback()

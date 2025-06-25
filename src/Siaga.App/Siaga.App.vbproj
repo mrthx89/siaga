@@ -18,6 +18,21 @@
     <OptionInfer>On</OptionInfer>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -268,15 +283,23 @@
     <Compile Include="Model\AppConfig.vb" />
     <Compile Include="Model\AssetDTo.vb" />
     <Compile Include="Model\Enum.vb" />
+    <Compile Include="Model\FilterListPemutihan.vb" />
+    <Compile Include="Model\FilterListPemakaian.vb" />
+    <Compile Include="Model\PemutihanDTo.vb" />
+    <Compile Include="Model\PemakaianDTo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Repository\Pemutihan.vb" />
+    <Compile Include="Repository\Pemakaian.vb" />
     <Compile Include="Repository\Asset.vb" />
     <Compile Include="Repository\Ruangan.vb" />
     <Compile Include="Repository\KategoriAsset.vb" />
     <Compile Include="Repository\Pengguna.vb" />
+    <Compile Include="Services\IPemutihan.vb" />
+    <Compile Include="Services\IPemakaian.vb" />
     <Compile Include="Services\IAsset.vb" />
     <Compile Include="Services\IRuangan.vb" />
     <Compile Include="Services\IKategoriAsset.vb" />
@@ -395,7 +418,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Logo.png" />
+    <None Include="Resources\Pemakaian.png" />
+    <None Include="Resources\Pemutihan.png" />
     <Content Include="wcr92-w7v0r-001.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

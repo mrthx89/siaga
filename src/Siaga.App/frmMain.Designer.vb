@@ -38,7 +38,7 @@ Partial Class frmMain
         Me.mnKategoriAsset = New DevExpress.XtraBars.BarButtonItem()
         Me.mnAssets = New DevExpress.XtraBars.BarButtonItem()
         Me.mnRuangan = New DevExpress.XtraBars.BarButtonItem()
-        Me.mnPemindahan = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnPemakaian = New DevExpress.XtraBars.BarButtonItem()
         Me.mnPemutihan = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage2 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -63,7 +63,7 @@ Partial Class frmMain
         Me.ribbonControl.ApplicationCaption = "Siaga.App"
         Me.ribbonControl.ApplicationIcon = Global.Siaga.App.My.Resources.Resources.Logo
         Me.ribbonControl.ExpandCollapseItem.Id = 0
-        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting, Me.mnServer, Me.mnStatusUser, Me.mnKategoriAsset, Me.mnAssets, Me.mnRuangan, Me.mnPemindahan, Me.mnPemutihan})
+        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting, Me.mnServer, Me.mnStatusUser, Me.mnKategoriAsset, Me.mnAssets, Me.mnRuangan, Me.mnPemakaian, Me.mnPemutihan})
         Me.ribbonControl.Location = New System.Drawing.Point(0, 0)
         Me.ribbonControl.MaxItemId = 55
         Me.ribbonControl.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always
@@ -144,16 +144,18 @@ Partial Class frmMain
         Me.mnRuangan.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Lokasi
         Me.mnRuangan.Name = "mnRuangan"
         '
-        'mnPemindahan
+        'mnPemakaian
         '
-        Me.mnPemindahan.Caption = "Pemindahan"
-        Me.mnPemindahan.Id = 53
-        Me.mnPemindahan.Name = "mnPemindahan"
+        Me.mnPemakaian.Caption = "Pemakaian"
+        Me.mnPemakaian.Id = 53
+        Me.mnPemakaian.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Pemakaian
+        Me.mnPemakaian.Name = "mnPemakaian"
         '
         'mnPemutihan
         '
         Me.mnPemutihan.Caption = "Pemutihan"
         Me.mnPemutihan.Id = 54
+        Me.mnPemutihan.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Pemutihan
         Me.mnPemutihan.Name = "mnPemutihan"
         '
         'RibbonPage2
@@ -173,7 +175,7 @@ Partial Class frmMain
         '
         'RibbonPageGroup3
         '
-        Me.RibbonPageGroup3.ItemLinks.Add(Me.mnPemindahan)
+        Me.RibbonPageGroup3.ItemLinks.Add(Me.mnPemakaian)
         Me.RibbonPageGroup3.ItemLinks.Add(Me.mnPemutihan)
         Me.RibbonPageGroup3.Name = "RibbonPageGroup3"
         Me.RibbonPageGroup3.Text = "Transaksi"
@@ -258,7 +260,7 @@ Partial Class frmMain
     Friend WithEvents mnKategoriAsset As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnAssets As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnRuangan As DevExpress.XtraBars.BarButtonItem
-    Friend WithEvents mnPemindahan As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnPemakaian As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnPemutihan As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents RibbonPageGroup3 As DevExpress.XtraBars.Ribbon.RibbonPageGroup

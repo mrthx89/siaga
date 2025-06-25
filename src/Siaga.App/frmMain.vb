@@ -143,4 +143,12 @@ Public Class frmMain
         End Using
         mnStatusUser.Enabled = True
     End Sub
+
+    Private Sub mnPemindahan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnPemakaian.ItemClick
+
+    End Sub
+
+    Private Sub mnPemutihan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnPemutihan.ItemClick
+
+    End Sub
 End Class

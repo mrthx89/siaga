@@ -47,13 +47,13 @@ Namespace Migrations
                 )
             End If
 
-            If Not context.JenisTransaksies.Any(Function(p) p.kd_jenis_transaksi.ToLower() = "pemindahan".ToLower()) Then
+            If Not context.JenisTransaksies.Any(Function(p) p.id = Guid.Parse("BE949D30-CEAF-45DF-A20A-08211AA6B63C")) Then
                 context.JenisTransaksies.AddOrUpdate(
                     Function(p) p.kd_jenis_transaksi, ' digunakan sebagai identifikasi unik
                     New Data.Entity.JenisTransaksi With {
                         .id = Guid.Parse("BE949D30-CEAF-45DF-A20A-08211AA6B63C"),
-                        .kd_jenis_transaksi = "Pemindahan",
-                        .nama_jenis_transaksi = "Pemindahan"
+                        .kd_jenis_transaksi = "Pemakaian",
+                        .nama_jenis_transaksi = "Pemakaian"
                     }
                 )
             End If
