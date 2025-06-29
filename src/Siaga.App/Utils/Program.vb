@@ -43,13 +43,7 @@ Public Class Program
             SkinManager.EnableFormSkins()
 
             OpenConfig()
-
-            Dim migrator = New DbMigrator(New Migrations.Configuration())
-            migrator.Update()
-
-            Dim db = New Data.ApplicationDbContext()
-            Migrations.Configuration.SeedData(db)
-            db.SaveChanges()
+            EnsureDatabase()
 
             Application.Run(New frmMain())
         Catch ex As Exception
@@ -57,6 +51,20 @@ Public Class Program
             DevExpress.XtraEditors.XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             Log.CloseAndFlush()
+        End Try
+    End Sub
+
+    Private Shared Sub EnsureDatabase()
+        Try
+            Dim migrator = New DbMigrator(New Migrations.Configuration())
+            migrator.Update()
+
+            Dim db = New Data.ApplicationDbContext()
+            Migrations.Configuration.SeedData(db)
+            db.SaveChanges()
+        Catch ex As Exception
+            Log.Error(ex, "Error : " & ex.Message)
+            DevExpress.XtraEditors.XtraMessageBox.Show("Error : " & ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 

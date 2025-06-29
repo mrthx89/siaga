@@ -173,4 +173,34 @@ Public Class frmMain
         frm.Show()
         frm.Focus()
     End Sub
+
+    Private Sub mnLaporanRekapRuangan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLaporanRekapRuangan.ItemClick
+        Dim frm As frmRekapLaporanRuangan = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is frmRekapLaporanRuangan Then
+                frm = TryCast(ctl, frmRekapLaporanRuangan)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New frmRekapLaporanRuangan() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
+    End Sub
+
+    Private Sub mnLaporanRekapAsset_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLaporanRekapAsset.ItemClick
+        Dim frm As frmRekapAsset = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is frmRekapAsset Then
+                frm = TryCast(ctl, frmRekapAsset)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New frmRekapAsset() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
+    End Sub
 End Class

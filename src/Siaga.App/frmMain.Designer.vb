@@ -40,6 +40,7 @@ Partial Class frmMain
         Me.mnRuangan = New DevExpress.XtraBars.BarButtonItem()
         Me.mnPemakaian = New DevExpress.XtraBars.BarButtonItem()
         Me.mnPemutihan = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnLaporanRekapRuangan = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage2 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup3 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -49,6 +50,7 @@ Partial Class frmMain
         Me.ribbonPageGroup = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.ribbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.XtraTabbedMdiManager1 = New DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(Me.components)
+        Me.mnLaporanRekapAsset = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.tabbedView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ribbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,9 +65,9 @@ Partial Class frmMain
         Me.ribbonControl.ApplicationCaption = "Siaga.App"
         Me.ribbonControl.ApplicationIcon = Global.Siaga.App.My.Resources.Resources.Logo
         Me.ribbonControl.ExpandCollapseItem.Id = 0
-        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting, Me.mnServer, Me.mnStatusUser, Me.mnKategoriAsset, Me.mnAssets, Me.mnRuangan, Me.mnPemakaian, Me.mnPemutihan})
+        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting, Me.mnServer, Me.mnStatusUser, Me.mnKategoriAsset, Me.mnAssets, Me.mnRuangan, Me.mnPemakaian, Me.mnPemutihan, Me.mnLaporanRekapRuangan, Me.mnLaporanRekapAsset})
         Me.ribbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonControl.MaxItemId = 55
+        Me.ribbonControl.MaxItemId = 57
         Me.ribbonControl.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always
         Me.ribbonControl.Name = "ribbonControl"
         Me.ribbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage2, Me.RibbonPage1})
@@ -158,6 +160,13 @@ Partial Class frmMain
         Me.mnPemutihan.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Pemutihan
         Me.mnPemutihan.Name = "mnPemutihan"
         '
+        'mnLaporanRekapRuangan
+        '
+        Me.mnLaporanRekapRuangan.Caption = "Rekap Ruangan"
+        Me.mnLaporanRekapRuangan.Id = 55
+        Me.mnLaporanRekapRuangan.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Report
+        Me.mnLaporanRekapRuangan.Name = "mnLaporanRekapRuangan"
+        '
         'RibbonPage2
         '
         Me.RibbonPage2.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.RibbonPageGroup3, Me.RibbonPageGroup4})
@@ -182,6 +191,8 @@ Partial Class frmMain
         '
         'RibbonPageGroup4
         '
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.mnLaporanRekapAsset)
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.mnLaporanRekapRuangan)
         Me.RibbonPageGroup4.Name = "RibbonPageGroup4"
         Me.RibbonPageGroup4.Text = "Laporan"
         '
@@ -218,6 +229,13 @@ Partial Class frmMain
         'XtraTabbedMdiManager1
         '
         Me.XtraTabbedMdiManager1.MdiParent = Me
+        '
+        'mnLaporanRekapAsset
+        '
+        Me.mnLaporanRekapAsset.Caption = "Rekap Aset"
+        Me.mnLaporanRekapAsset.Id = 56
+        Me.mnLaporanRekapAsset.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Report
+        Me.mnLaporanRekapAsset.Name = "mnLaporanRekapAsset"
         '
         'frmMain
         '
@@ -265,4 +283,6 @@ Partial Class frmMain
     Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents RibbonPageGroup3 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents RibbonPageGroup4 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
+    Friend WithEvents mnLaporanRekapRuangan As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnLaporanRekapAsset As DevExpress.XtraBars.BarButtonItem
 End Class

@@ -120,16 +120,9 @@ Namespace Repository
                     End If
 
                     DbContext.Pemakaians.Add(Data)
-                    DbContext.SaveChanges()
 
                     'Ke History
                     Dim jenisTransaksi = DbContext.JenisTransaksies.FirstOrDefault(Function(m) m.kd_jenis_transaksi.ToLower() = "Pemakaian".ToLower())
-                    Dim queryHapus = (From x In DbContext.HistoryDetailAssets
-                                      From a In DbContext.Pemakaians.Where(Function(m) m.id = x.id_transaksi AndAlso x.id_jenis_transaksi = jenisTransaksi.id).DefaultIfEmpty()
-                                      Where a.id = Data.id AndAlso x.id_jenis_transaksi = jenisTransaksi.id
-                                      Select x)
-                    DbContext.HistoryDetailAssets.RemoveRange(queryHapus)
-
                     Dim queryInsert As New HistoryDetailAsset With {
                                                   .id = Guid.NewGuid,
                                                   .id_detail_asset = Data.id_detail_asset,
@@ -139,6 +132,7 @@ Namespace Repository
                                                   .tgl_transaksi = Data.tgl_mulai_pakai}
                     DbContext.HistoryDetailAssets.Add(queryInsert)
 
+                    DbContext.SaveChanges()
                     transaction.Commit()
                     transaction = Nothing
                     hasil = New Tuple(Of Boolean, String, Data.Entity.Pemakaian)(True, "Data telah disimpan", Data)
@@ -182,13 +176,11 @@ Namespace Repository
                     End If
 
                     DbContext.Entry(trans).CurrentValues.SetValues(Data)
-                    DbContext.SaveChanges()
 
                     'Ke History
                     Dim jenisTransaksi = DbContext.JenisTransaksies.FirstOrDefault(Function(m) m.kd_jenis_transaksi.ToLower() = "Pemakaian".ToLower())
                     Dim queryHapus = (From x In DbContext.HistoryDetailAssets
-                                      From a In DbContext.Pemakaians.Where(Function(m) m.id = x.id_transaksi AndAlso x.id_jenis_transaksi = jenisTransaksi.id).DefaultIfEmpty()
-                                      Where a.id = Data.id AndAlso x.id_jenis_transaksi = jenisTransaksi.id
+                                      Where x.id_transaksi = Data.id AndAlso x.id_jenis_transaksi = jenisTransaksi.id
                                       Select x)
                     DbContext.HistoryDetailAssets.RemoveRange(queryHapus)
 
@@ -201,6 +193,7 @@ Namespace Repository
                                                   .tgl_transaksi = Data.tgl_mulai_pakai}
                     DbContext.HistoryDetailAssets.Add(queryInsert)
 
+                    DbContext.SaveChanges()
                     transaction.Commit()
                     transaction = Nothing
                     hasil = New Tuple(Of Boolean, String, Data.Entity.Pemakaian)(True, "Data telah disimpan", Data)
@@ -228,8 +221,7 @@ Namespace Repository
                         'Ke History
                         Dim jenisTransaksi = DbContext.JenisTransaksies.FirstOrDefault(Function(m) m.kd_jenis_transaksi.ToLower() = "Pemakaian".ToLower())
                         Dim queryHapus = (From x In DbContext.HistoryDetailAssets
-                                          From a In DbContext.Pemakaians.Where(Function(m) m.id = x.id_transaksi AndAlso x.id_jenis_transaksi = jenisTransaksi.id).DefaultIfEmpty()
-                                          Where a.id = id AndAlso x.id_jenis_transaksi = jenisTransaksi.id
+                                          Where x.id_transaksi = id AndAlso x.id_jenis_transaksi = jenisTransaksi.id
                                           Select x)
                         DbContext.HistoryDetailAssets.RemoveRange(queryHapus)
                         DbContext.Pemakaians.Remove(result)
