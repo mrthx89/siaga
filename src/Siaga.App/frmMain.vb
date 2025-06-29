@@ -175,30 +175,60 @@ Public Class frmMain
     End Sub
 
     Private Sub mnLaporanRekapRuangan_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLaporanRekapRuangan.ItemClick
-        Dim frm As frmRekapLaporanRuangan = Nothing
+        Dim frm As Report.frmRekapLaporanRuangan = Nothing
         For Each ctl In Me.MdiChildren
-            If TypeOf ctl Is frmRekapLaporanRuangan Then
-                frm = TryCast(ctl, frmRekapLaporanRuangan)
+            If TypeOf ctl Is Report.frmRekapLaporanRuangan Then
+                frm = TryCast(ctl, Report.frmRekapLaporanRuangan)
                 Exit For
             End If
         Next
         If (frm Is Nothing) Then
-            frm = New frmRekapLaporanRuangan() With {.MdiParent = Me}
+            frm = New Report.frmRekapLaporanRuangan() With {.MdiParent = Me}
         End If
         frm.Show()
         frm.Focus()
     End Sub
 
     Private Sub mnLaporanRekapAsset_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLaporanRekapAsset.ItemClick
-        Dim frm As frmRekapAsset = Nothing
+        Dim frm As Report.frmRekapAsset = Nothing
         For Each ctl In Me.MdiChildren
-            If TypeOf ctl Is frmRekapAsset Then
-                frm = TryCast(ctl, frmRekapAsset)
+            If TypeOf ctl Is Report.frmRekapAsset Then
+                frm = TryCast(ctl, Report.frmRekapAsset)
                 Exit For
             End If
         Next
         If (frm Is Nothing) Then
-            frm = New frmRekapAsset() With {.MdiParent = Me}
+            frm = New Report.frmRekapAsset() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
+    End Sub
+
+    Private Sub mnLaporanRincianAsset_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLaporanRincianAsset.ItemClick
+        Dim frm As Report.frmRincianAsset = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is Report.frmRincianAsset Then
+                frm = TryCast(ctl, Report.frmRincianAsset)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New Report.frmRincianAsset() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
+    End Sub
+
+    Private Sub mnLaporanRincianAssetRusak_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLaporanRincianAssetRusak.ItemClick
+        Dim frm As Report.frmRincianAssetRusak = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is Report.frmRincianAssetRusak Then
+                frm = TryCast(ctl, Report.frmRincianAssetRusak)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New Report.frmRincianAssetRusak() With {.MdiParent = Me}
         End If
         frm.Show()
         frm.Focus()

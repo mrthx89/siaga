@@ -274,16 +274,28 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRekapAsset.Designer.vb">
-      <DependentUpon>frmRekapAsset.vb</DependentUpon>
+    <Compile Include="Report\frmRincianAssetRusak.Designer.vb">
+      <DependentUpon>frmRincianAssetRusak.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmRekapAsset.vb">
+    <Compile Include="Report\frmRincianAssetRusak.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRekapLaporanRuangan.Designer.vb">
+    <Compile Include="Report\frmRincianAsset.Designer.vb">
+      <DependentUpon>frmRincianAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmRincianAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmRekapAsset.Designer.vb">
+      <DependentUpon>frmRekapAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmRekapAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmRekapLaporanRuangan.Designer.vb">
       <DependentUpon>frmRekapLaporanRuangan.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmRekapLaporanRuangan.vb">
+    <Compile Include="Report\frmRekapLaporanRuangan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSetting.Designer.vb">
@@ -404,10 +416,16 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRekapAsset.resx">
+    <EmbeddedResource Include="Report\frmRincianAssetRusak.resx">
+      <DependentUpon>frmRincianAssetRusak.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmRincianAsset.resx">
+      <DependentUpon>frmRincianAsset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmRekapAsset.resx">
       <DependentUpon>frmRekapAsset.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRekapLaporanRuangan.resx">
+    <EmbeddedResource Include="Report\frmRekapLaporanRuangan.resx">
       <DependentUpon>frmRekapLaporanRuangan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetting.resx">
