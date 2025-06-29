@@ -43,6 +43,8 @@ Partial Class frmMain
         Me.mnLaporanRekapRuangan = New DevExpress.XtraBars.BarButtonItem()
         Me.mnLaporanRekapAsset = New DevExpress.XtraBars.BarButtonItem()
         Me.mnLaporanRincianAsset = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnLaporanRincianAssetRusak = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnLaporanPemutihanAsset = New DevExpress.XtraBars.BarButtonItem()
         Me.RibbonPage2 = New DevExpress.XtraBars.Ribbon.RibbonPage()
         Me.RibbonPageGroup2 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.RibbonPageGroup3 = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
@@ -52,7 +54,7 @@ Partial Class frmMain
         Me.ribbonPageGroup = New DevExpress.XtraBars.Ribbon.RibbonPageGroup()
         Me.ribbonStatusBar = New DevExpress.XtraBars.Ribbon.RibbonStatusBar()
         Me.XtraTabbedMdiManager1 = New DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(Me.components)
-        Me.mnLaporanRincianAssetRusak = New DevExpress.XtraBars.BarButtonItem()
+        Me.mnLaporanRincianKodeAsset = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.tabbedView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ribbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabbedMdiManager1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,9 +69,9 @@ Partial Class frmMain
         Me.ribbonControl.ApplicationCaption = "Siaga.App"
         Me.ribbonControl.ApplicationIcon = Global.Siaga.App.My.Resources.Resources.Logo
         Me.ribbonControl.ExpandCollapseItem.Id = 0
-        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting, Me.mnServer, Me.mnStatusUser, Me.mnKategoriAsset, Me.mnAssets, Me.mnRuangan, Me.mnPemakaian, Me.mnPemutihan, Me.mnLaporanRekapRuangan, Me.mnLaporanRekapAsset, Me.mnLaporanRincianAsset, Me.mnLaporanRincianAssetRusak})
+        Me.ribbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.ribbonControl.ExpandCollapseItem, Me.skinRibbonGalleryBarItem, Me.employeesBarButtonItem, Me.customersBarButtonItem, Me.mnLogInOut, Me.mnSetting, Me.mnServer, Me.mnStatusUser, Me.mnKategoriAsset, Me.mnAssets, Me.mnRuangan, Me.mnPemakaian, Me.mnPemutihan, Me.mnLaporanRekapRuangan, Me.mnLaporanRekapAsset, Me.mnLaporanRincianAsset, Me.mnLaporanRincianAssetRusak, Me.mnLaporanPemutihanAsset, Me.mnLaporanRincianKodeAsset})
         Me.ribbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.ribbonControl.MaxItemId = 59
+        Me.ribbonControl.MaxItemId = 61
         Me.ribbonControl.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always
         Me.ribbonControl.Name = "ribbonControl"
         Me.ribbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage2, Me.RibbonPage1})
@@ -183,6 +185,20 @@ Partial Class frmMain
         Me.mnLaporanRincianAsset.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Report
         Me.mnLaporanRincianAsset.Name = "mnLaporanRincianAsset"
         '
+        'mnLaporanRincianAssetRusak
+        '
+        Me.mnLaporanRincianAssetRusak.Caption = "Rincian Aset Rusak"
+        Me.mnLaporanRincianAssetRusak.Id = 58
+        Me.mnLaporanRincianAssetRusak.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Report
+        Me.mnLaporanRincianAssetRusak.Name = "mnLaporanRincianAssetRusak"
+        '
+        'mnLaporanPemutihanAsset
+        '
+        Me.mnLaporanPemutihanAsset.Caption = "Rincian Pemutihan Aset"
+        Me.mnLaporanPemutihanAsset.Id = 59
+        Me.mnLaporanPemutihanAsset.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Report
+        Me.mnLaporanPemutihanAsset.Name = "mnLaporanPemutihanAsset"
+        '
         'RibbonPage2
         '
         Me.RibbonPage2.Groups.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPageGroup() {Me.RibbonPageGroup2, Me.RibbonPageGroup3, Me.RibbonPageGroup4})
@@ -211,6 +227,8 @@ Partial Class frmMain
         Me.RibbonPageGroup4.ItemLinks.Add(Me.mnLaporanRekapRuangan)
         Me.RibbonPageGroup4.ItemLinks.Add(Me.mnLaporanRincianAsset)
         Me.RibbonPageGroup4.ItemLinks.Add(Me.mnLaporanRincianAssetRusak)
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.mnLaporanPemutihanAsset)
+        Me.RibbonPageGroup4.ItemLinks.Add(Me.mnLaporanRincianKodeAsset)
         Me.RibbonPageGroup4.Name = "RibbonPageGroup4"
         Me.RibbonPageGroup4.Text = "Laporan"
         '
@@ -248,12 +266,12 @@ Partial Class frmMain
         '
         Me.XtraTabbedMdiManager1.MdiParent = Me
         '
-        'mnLaporanRincianAssetRusak
+        'mnLaporanRincianKodeAsset
         '
-        Me.mnLaporanRincianAssetRusak.Caption = "Rincian Aset Rusak"
-        Me.mnLaporanRincianAssetRusak.Id = 58
-        Me.mnLaporanRincianAssetRusak.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Report
-        Me.mnLaporanRincianAssetRusak.Name = "mnLaporanRincianAssetRusak"
+        Me.mnLaporanRincianKodeAsset.Caption = "Kodefikasi Aset"
+        Me.mnLaporanRincianKodeAsset.Id = 60
+        Me.mnLaporanRincianKodeAsset.ImageOptions.LargeImage = Global.Siaga.App.My.Resources.Resources.Report
+        Me.mnLaporanRincianKodeAsset.Name = "mnLaporanRincianKodeAsset"
         '
         'frmMain
         '
@@ -305,4 +323,6 @@ Partial Class frmMain
     Friend WithEvents mnLaporanRekapAsset As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnLaporanRincianAsset As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents mnLaporanRincianAssetRusak As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnLaporanPemutihanAsset As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents mnLaporanRincianKodeAsset As DevExpress.XtraBars.BarButtonItem
 End Class

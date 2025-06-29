@@ -233,4 +233,34 @@ Public Class frmMain
         frm.Show()
         frm.Focus()
     End Sub
+
+    Private Sub mnLaporanPemutihanAsset_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLaporanPemutihanAsset.ItemClick
+        Dim frm As Report.frmRincianPemutihan = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is Report.frmRincianPemutihan Then
+                frm = TryCast(ctl, Report.frmRincianPemutihan)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New Report.frmRincianPemutihan() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
+    End Sub
+
+    Private Sub mnLaporanRincianKodeAsset_ItemClick(sender As Object, e As ItemClickEventArgs) Handles mnLaporanRincianKodeAsset.ItemClick
+        Dim frm As Report.frmRincianKodeAsset = Nothing
+        For Each ctl In Me.MdiChildren
+            If TypeOf ctl Is Report.frmRincianKodeAsset Then
+                frm = TryCast(ctl, Report.frmRincianKodeAsset)
+                Exit For
+            End If
+        Next
+        If (frm Is Nothing) Then
+            frm = New Report.frmRincianKodeAsset() With {.MdiParent = Me}
+        End If
+        frm.Show()
+        frm.Focus()
+    End Sub
 End Class

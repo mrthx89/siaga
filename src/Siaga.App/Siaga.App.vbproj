@@ -274,6 +274,18 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Report\frmRincianKodeAsset.Designer.vb">
+      <DependentUpon>frmRincianKodeAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmRincianKodeAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmRincianPemutihan.Designer.vb">
+      <DependentUpon>frmRincianPemutihan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmRincianPemutihan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Report\frmRincianAssetRusak.Designer.vb">
       <DependentUpon>frmRincianAssetRusak.vb</DependentUpon>
     </Compile>
@@ -415,6 +427,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmRincianKodeAsset.resx">
+      <DependentUpon>frmRincianKodeAsset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmRincianPemutihan.resx">
+      <DependentUpon>frmRincianPemutihan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmRincianAssetRusak.resx">
       <DependentUpon>frmRincianAssetRusak.vb</DependentUpon>
