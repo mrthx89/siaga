@@ -47,8 +47,7 @@ Namespace Migrations
                 )
             End If
 
-            Dim idJenis As Guid = Guid.Parse("BE949D30-CEAF-45DF-A20A-08211AA6B63C")
-            If (context.JenisTransaksies.Any(Function(p) p.id = idJenis AndAlso p.kd_jenis_transaksi.ToLower() <> "Pemakaian".ToLower())) Then
+            If Not context.JenisTransaksies.Any(Function(p) p.kd_jenis_transaksi.ToLower() = "pemakaian".ToLower()) Then
                 context.JenisTransaksies.AddOrUpdate(
                     Function(p) p.id, ' digunakan sebagai identifikasi unik
                     New Data.Entity.JenisTransaksi With {
